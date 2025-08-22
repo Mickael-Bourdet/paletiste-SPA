@@ -1,1 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+
 @import "tailwindcss";
+
+@theme {
+  --color-pearl: #f2f2f2;
+  --color-bluegray: #f0f4f8;
+  --color-btn-blue-night: #1b2a49;
+  --color-btn-blue-royal: #3a5fcd;
+  --font-title-merry: "Merriweather", serif;
+  --font-title-lato: "Lato", sans-serif;
+  --font-body-nunito: "Nunito", sans-serif;
+  --font-body-source: "Source Sans 3", sans-serif;
+}
