@@ -14,12 +14,12 @@ export default function MobileNavLink({ linkTo, icon, label }: INavLinkProps) {
     <div className="md:hidden">
       <Link
         to={linkTo}
-        className={`flex flex-col items-center text-sm  ${
+        className={`flex flex-col items-center text-xl  ${
           isActive ? "text-hover" : ""
         }`}
       >
         <i className={`${icon}`}></i>
-        <span className="whitespace-nowrap">{label}</span>
+        <span className="whitespace-nowrap text-sm">{label}</span>
       </Link>
     </div>
   );

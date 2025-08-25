@@ -1,5 +1,5 @@
 import "./App.css";
-import BackToTopPage from "./components/BackToTopPage";
+import BackToTopPage from "./utils/BackToTopPage";
 import MobileNav from "./components/layout/MobileNav";
 
 function App() {

@@ -13,6 +13,7 @@ export default function MobileNav() {
         icon="fa-solid fa-calendar-days"
         label="Concours"
       />
+      <i className="fa-solid fa-plus rounded-full p-2 bg-royal text-body border-royal text-2xl"></i>
       <MobileNavLink
         linkTo="/search"
         icon="fa-solid fa-magnifying-glass"
