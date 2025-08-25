@@ -7,6 +7,9 @@
   --color-body-second: #f0f4f8; /* blue-gray other body choice in case */
   --color-primary: #1b2a49; /* midnight text & button primary */
   --color-primary-hover: #2c3e66;
+  --color-hover: #4a6cf7;
+  --color-hover-two: #bf5b04;
+  --color-hover-three: #c0392b;
   --color-royal: #3a5fcd;
   --color-royal-hover: #263fa1;
   --color-validate: #4caf50;
