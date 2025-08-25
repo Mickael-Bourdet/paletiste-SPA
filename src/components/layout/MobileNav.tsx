@@ -2,7 +2,7 @@ import MobileNavLink from "./MobileNavLink";
 
 export default function MobileNav() {
   return (
-    <div className="fixed bottom-0 left-0 w-full flex justify-around items-baseline font-title p-2 z-10 border-t border-primary">
+    <div className="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-baseline font-title p-2 z-10 border-t border-primary">
       <MobileNavLink
         linkTo="/"
         icon="fa-solid fa-house-chimney"

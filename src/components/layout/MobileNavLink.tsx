@@ -11,16 +11,14 @@ export default function MobileNavLink({ linkTo, icon, label }: INavLinkProps) {
   const isActive = location.pathname === linkTo;
 
   return (
-    <div className="md:hidden">
-      <Link
-        to={linkTo}
-        className={`flex flex-col items-center text-xl  ${
-          isActive ? "text-hover" : ""
-        }`}
-      >
-        <i className={`${icon}`}></i>
-        <span className="whitespace-nowrap text-sm">{label}</span>
-      </Link>
-    </div>
+    <Link
+      to={linkTo}
+      className={`flex flex-col items-center text-xl  ${
+        isActive ? "text-hover" : ""
+      }`}
+    >
+      <i className={`${icon}`}></i>
+      <span className="whitespace-nowrap text-sm">{label}</span>
+    </Link>
   );
 }
