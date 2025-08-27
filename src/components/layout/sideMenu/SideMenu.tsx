@@ -11,13 +11,22 @@ const menuItems = [
 export default function SideMenu({ isOpen, onClose }: ISideMenuProps) {
   return (
     <>
-      <div className="fixed inset-0 z-10" onClick={onClose}></div>
+      {/* Overlay to handle close menu on click outside the menu*/}
       <div
+        className="fixed inset-0 z-10"
+        onClick={onClose}
+        aria-hidden="true"
+      ></div>
+      <div
+        id="side-menu"
+        role="menu"
+        aria-hidden={!isOpen}
         className={`fixed h-auto bottom-[72px] w-full xxs:w-[50vw] right-0 bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
           isOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <button
+          aria-label="Fermer le menu"
           className="ml-auto flex items-baseline mx-6 my-2"
           onClick={onClose}
         >

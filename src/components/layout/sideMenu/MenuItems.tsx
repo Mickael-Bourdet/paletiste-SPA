@@ -14,6 +14,7 @@ export default function MenuItems({ items, onItemClick }: IMenuItemsProps) {
       {items.map((item, index) => (
         <li key={index} className="mb-1">
           <NavLink
+            role="menuitem"
             to={item.link}
             className="block w-full py-1"
             onClick={onItemClick}

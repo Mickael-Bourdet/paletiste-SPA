@@ -27,7 +27,13 @@ export default function MobileNav() {
         icon="fa-solid fa-calendar-days"
         label="Concours"
       />
-      <button className="flex flex-col" onClick={toggleMenu}>
+      <button
+        className="flex flex-col"
+        onClick={toggleMenu}
+        aria-expanded={isMenuOpen}
+        aria-controls="side-menu"
+        aria-label="Ouvrir le menu plus"
+      >
         <i className="fa-solid fa-ellipsis text-2xl"></i>
         <span className=" text-sm">Plus</span>
       </button>
