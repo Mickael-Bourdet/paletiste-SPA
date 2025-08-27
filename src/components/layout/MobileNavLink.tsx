@@ -13,7 +13,7 @@ export default function MobileNavLink({ linkTo, icon, label }: INavLinkProps) {
   return (
     <Link
       to={linkTo}
-      className={`flex flex-col items-center text-xl  ${
+      className={`flex flex-col items-center text-lg ${
         isActive ? "text-hover" : ""
       }`}
     >
