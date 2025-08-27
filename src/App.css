@@ -16,6 +16,7 @@
   --color-validate-hover: #3a853c;
   --color-delete: #d42511;
   --color-delete-hover: #b61f0f;
+  --color-sideMenu: #ffffff;
   --font-title: "Russo One", sans-serif;
   --font-subtitle: "Exo 2", sans-serif;
   --font-body: "Raleway", sans-serif;
@@ -26,6 +27,9 @@
   --color-body: #121826;
   --color-primary: #f2f2f2; /* text & button primary */
   --color-primary-hover: #e4c6c6;
+  --color-sideMenu: #1a202c;
+  /* --color-sideMenu: #1f2937; */
+  /* --color-sideMenu: #0f172a; */
 }
 
 /* The side navigation menu */
