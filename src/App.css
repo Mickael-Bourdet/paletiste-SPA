@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway&family=Russo+One&family=Exo+2:wght@500&display=swap");
 
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-body: #f2f2f2; /* body */
@@ -27,9 +28,8 @@
   --color-body: #121826;
   --color-primary: #f2f2f2; /* text & button primary */
   --color-primary-hover: #e4c6c6;
-  --color-sideMenu: #1a202c;
-  /* --color-sideMenu: #1f2937; */
-  /* --color-sideMenu: #0f172a; */
+  /* --color-sideMenu: #1a202c; */
+  --color-sideMenu: #1f2937;
 }
 
 /* The side navigation menu */
