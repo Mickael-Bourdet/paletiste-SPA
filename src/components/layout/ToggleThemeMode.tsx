@@ -1,13 +1,24 @@
 import { useThemeMode } from "../../utils/useThemeMode";
 
-export default function ToggleTheme() {
+export default function ToggleThemeMode() {
   const { theme, toggleTheme } = useThemeMode();
 
   return (
     <>
-      <div className="flex gap-10 pb-4">
+      <div className="flex gap-4 pb-4">
         <span className="pl-6">
-          Thème : {theme === "light" ? "Clair" : "Sombre"}
+          Thème :{" "}
+          {theme === "light" ? (
+            <>
+              {" "}
+              Clair <i className="fa-solid fa-sun pl-2"></i>
+            </>
+          ) : (
+            <>
+              {" "}
+              Sombre <i className="fa-solid fa-moon pl-2 "></i>
+            </>
+          )}
         </span>
         <label className="flex cursor-pointer select-none items-center">
           <div className="relative">

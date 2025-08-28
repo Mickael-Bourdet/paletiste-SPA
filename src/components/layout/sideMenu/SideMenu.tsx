@@ -1,4 +1,4 @@
-import ToggleTheme from "../ToggleTheme";
+import ToggleThemeMode from "../ToggleThemeMode";
 import MenuItems from "./MenuItems";
 
 interface ISideMenuProps {
@@ -36,7 +36,7 @@ export default function SideMenu({ isOpen, onClose }: ISideMenuProps) {
         </button>
 
         <MenuItems items={menuItems} onItemClick={onClose} />
-        <ToggleTheme />
+        <ToggleThemeMode />
       </div>
     </>
   );
