@@ -24,10 +24,11 @@ export default function Header() {
       <div className="hidden md:flex items-baseline gap-4">
         <i className="fa-solid fa-magnifying-glass border p-2 border-gray-300 bg-gray-300"></i>
         <i className="fa-solid fa-user border p-2 border-gray-300 bg-gray-300"></i>
-        <button className="rounded-full py-1 px-4 bg-royal text-body text-sm translate-y-1 ">
+        <button className="rounded-full py-1 px-4 bg-royal text-body text-sm">
           <i className="fa-solid fa-plus"></i>
           <span className="pl-2 text-lg">Créer</span>
         </button>
+        <i className="fa-solid fa-gear text-xl"></i>
       </div>
     </header>
   );
