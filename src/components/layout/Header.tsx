@@ -1,7 +1,15 @@
+import { useState } from "react";
 import { useThemeMode } from "../../utils/useThemeMode";
+import NavLink from "./NavLink";
+import ToggleThemeMode from "./ToggleThemeMode";
 
 export default function Header() {
   const { theme } = useThemeMode();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen((open) => !open);
+  };
   return (
     <header className="py-4 px-8 border-b border-gray-300 dark:border-gray-700 md:px-16 xl:px-48 md:flex items-center">
       <div className="flex justify-center items-center md:justify-start">
@@ -16,10 +24,10 @@ export default function Header() {
         />
         <p className="text-4xl font-title ml-2 md:text-2xl">Paletiste</p>
       </div>
-      <nav className="hidden md:flex flex-1 justify-center">
-        <p>lien 1</p>
-        <p>lien 2</p>
-        <p>lien 3</p>
+      <nav className="hidden md:flex flex-1 justify-center gap-6">
+        <NavLink linkTo="/concours" label="Les concours" />
+        <NavLink linkTo="/categories" label="Types de concours" />
+        <NavLink linkTo="/calendrier" label="Calendrier" />
       </nav>
       <div className="hidden md:flex items-baseline gap-4">
         <i className="fa-solid fa-magnifying-glass border p-2 border-gray-300 bg-gray-300"></i>
@@ -28,7 +36,33 @@ export default function Header() {
           <i className="fa-solid fa-plus"></i>
           <span className="pl-2 text-lg">Créer</span>
         </button>
-        <i className="fa-solid fa-gear text-xl"></i>
+        <button
+          onClick={toggleMenu}
+          aria-expanded={isMenuOpen}
+          aria-controls="params-menu"
+          aria-label="Ouvrir le menu des paramètres"
+        >
+          <i className="fa-solid fa-gear text-xl"></i>
+        </button>
+        {isMenuOpen && (
+          <>
+            <div
+              className="fixed inset-0 z-10"
+              onClick={() => setIsMenuOpen(false)}
+              aria-hidden="true"
+            ></div>
+            <div
+              id="params-menu"
+              role="menu"
+              aria-hidden={!isMenuOpen}
+              className={`fixed h-auto bottom-[70px] w-full xxs:w-[50vw] right-0 bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
+                isMenuOpen ? "translate-y-0" : "-translate-y-full"
+              }`}
+            >
+              <ToggleThemeMode />
+            </div>
+          </>
+        )}
       </div>
     </header>
   );
