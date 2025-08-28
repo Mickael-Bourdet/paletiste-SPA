@@ -1,6 +1,7 @@
 import "./App.css";
-import BackToTopPage from "./components/BackToTopPage";
+import BackToTopPage from "./utils/BackToTopPage";
 import MobileNav from "./components/layout/MobileNav";
+import Header from "./components/layout/Header";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
     <div className="bg-body min-h-screen text-primary flex flex-col">
       <BackToTopPage />
       <MobileNav />
+      <Header />
     </div>
   );
 }
