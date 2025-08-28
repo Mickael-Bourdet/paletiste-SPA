@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useThemeMode } from "../../utils/useThemeMode";
 import NavLink from "./NavLink";
 import ToggleThemeMode from "./ToggleThemeMode";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const { theme } = useThemeMode();
@@ -11,30 +12,45 @@ export default function Header() {
     setIsMenuOpen((open) => !open);
   };
   return (
-    <header className="py-4 px-8 border-b border-gray-300 dark:border-gray-700 md:px-16 xl:px-48 md:flex items-center">
-      <div className="flex justify-center items-center md:justify-start">
+    <header className="py-4 px-8 border-b border-gray-300 dark:border-gray-700 xl:px-48 mdl:flex items-center">
+      <div className="flex justify-center items-center mdl:hidden">
         <img
           src={
             theme === "dark"
               ? "/img/logo/logo_paletiste_blanc.webp"
               : "/img/logo/logo_paletiste_noir.webp"
           }
-          className="w-16 h-16 md:w-12 md:h-12"
-          alt="Logo du site paletiste représentant deux joueurs se serrant la main autour d'une planche"
+          className="w-16 h-16 "
+          alt="Logo du site paletiste"
         />
-        <p className="text-4xl font-title ml-2 md:text-2xl">Paletiste</p>
+        <p className="text-4xl font-title ml-2">Paletiste</p>
       </div>
-      <nav className="hidden md:flex flex-1 justify-center gap-6">
+      <Link
+        to="/"
+        className="hidden mdl:flex justify-center items-center mdl:justify-start"
+      >
+        <img
+          src={
+            theme === "dark"
+              ? "/img/logo/logo_paletiste_blanc.webp"
+              : "/img/logo/logo_paletiste_noir.webp"
+          }
+          className="w-12 h-12"
+          alt="Logo du site paletiste"
+        />
+        <p className="text-4xl font-title ml-2 mdl:text-2xl">Paletiste</p>
+      </Link>
+      <nav className="hidden mdl:flex flex-1 justify-center gap-6">
         <NavLink linkTo="/concours" label="Les concours" />
         <NavLink linkTo="/categories" label="Types de concours" />
         <NavLink linkTo="/calendrier" label="Calendrier" />
       </nav>
-      <div className="hidden md:flex items-baseline gap-4">
-        <i className="fa-solid fa-magnifying-glass border p-2 border-gray-300 bg-gray-300"></i>
-        <i className="fa-solid fa-user border p-2 border-gray-300 bg-gray-300"></i>
-        <button className="rounded-full py-1 px-4 bg-royal text-body text-sm">
+      <div className="hidden mdl:flex items-baseline justify-center gap-4 flex-wrap">
+        <i className="fa-solid fa-magnifying-glass border p-2 border-gray-300 bg-gray-300 dark:border-gray-700 dark:bg-gray-700 cursor-pointer"></i>
+        <i className="fa-solid fa-user border p-2 border-gray-300 bg-gray-300 dark:border-gray-700 dark:bg-gray-700 cursor-pointer"></i>
+        <button className="flex items-baseline rounded-full py-1 px-4 bg-royal text-body dark:text-primary text-sm cursor-pointer hover:outline-2 hover:outline-primary">
           <i className="fa-solid fa-plus"></i>
-          <span className="pl-2 text-lg">Créer</span>
+          <span className="pl-2 text-lg">Poster</span>
         </button>
         <button
           onClick={toggleMenu}
@@ -55,7 +71,7 @@ export default function Header() {
               id="params-menu"
               role="menu"
               aria-hidden={!isMenuOpen}
-              className={`fixed h-auto bottom-[70px] w-full xxs:w-[50vw] right-0 bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
+              className={`fixed h-auto top-20 right-1 xl:right-20 pt-4 pr-6 w-auto  bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
                 isMenuOpen ? "translate-y-0" : "-translate-y-full"
               }`}
             >

@@ -22,6 +22,8 @@
   --font-subtitle: "Exo 2", sans-serif;
   --font-body: "Raleway", sans-serif;
   --breakpoint-xxs: 28.125rem; /* 450 px */
+  --breakpoint-xs: 31.25rem; /* 500 px */
+  --breakpoint-mdl: 60.938rem; /* 950 px */
 }
 
 .dark {
@@ -30,6 +32,15 @@
   --color-primary-hover: #e4c6c6;
   /* --color-sideMenu: #1a202c; */
   --color-sideMenu: #1f2937;
+}
+
+.underline-link {
+  @apply relative 
+               after:content-[''] after:absolute after:left-0 after:-bottom-1 
+               after:w-full after:h-[2px] after:bg-current 
+               after:scale-x-0 after:origin-right 
+               after:transition-transform after:duration-300 
+               hover:after:scale-x-100 hover:after:origin-left;
 }
 
 /* The side navigation menu */

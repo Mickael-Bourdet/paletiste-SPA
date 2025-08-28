@@ -10,7 +10,7 @@ export default function MobileNav() {
   };
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-baseline font-title p-2 z-10 border-t border-primary">
+    <nav className="mdl:hidden fixed bottom-0 left-0 w-full flex justify-around items-baseline font-title p-2 z-10 border-t border-primary">
       <MobileNavLink
         linkTo="/"
         icon="fa-solid fa-house-chimney"

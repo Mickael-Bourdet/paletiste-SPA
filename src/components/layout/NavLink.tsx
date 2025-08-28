@@ -13,7 +13,7 @@ export default function NavLink({ linkTo, label, ariaLabel }: INavLinkProps) {
       <Link
         to={linkTo}
         aria-label={ariaLabel || label}
-        className={`flex flex-col items-center text-lg font-subtitle ${
+        className={`flex flex-col items-center text-lg font-subtitle underline-link ${
           isActive ? "text-hover" : ""
         }`}
       >
