@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react";
-import type { IEvents } from "../@types/event";
 import { getAllEvents } from "../api/eventAPI";
-import EventCard from "../components/EventCard";
+import DisplayEvents from "../components/DisplayEvents";
 
 export default function HomePage() {
-  const [eventsList, setEventsList] = useState<IEvents>([]);
-  useEffect(() => {
-    async function loadEvents() {
-      const events = await getAllEvents();
-
-      setEventsList(events);
-    }
-    loadEvents();
-  }, []);
   return (
     <>
-      <div className="flex flex-wrap mx-auto justify-center">
-        {eventsList.map((event) => (
-          <EventCard event={event} />
-        ))}
-      </div>
+      <DisplayEvents title="Évènements à venir" fetchEvents={getAllEvents} />
+      <DisplayEvents
+        title="Prochain évènement majeur"
+        fetchEvents={getAllEvents}
+      />
+      <DisplayEvents
+        title="Derniers concours enregistrés"
+        fetchEvents={getAllEvents}
+      />
     </>
   );
 }

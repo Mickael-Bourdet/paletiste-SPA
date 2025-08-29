@@ -8,7 +8,7 @@ interface IEventCardProps {
 export default function EventCard({ event }: IEventCardProps) {
   return (
     <>
-      <Link to="#" className="block w-70 mx-auto py-2">
+      <Link to="#" className="block w-70 mx-auto pt-6">
         <div
           key={event.id}
           className="cursor-pointer hover:shadow-lg hover:rounded-md hover:transition-shadow"
