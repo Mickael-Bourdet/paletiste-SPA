@@ -2,6 +2,7 @@ import "./App.css";
 import BackToTopPage from "./utils/BackToTopPage";
 import MobileNav from "./components/layout/MobileNav";
 import Header from "./components/layout/Header";
+import HomePage from "./pages/HomePage";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <BackToTopPage />
       <MobileNav />
       <Header />
+      <HomePage />
     </div>
   );
 }
