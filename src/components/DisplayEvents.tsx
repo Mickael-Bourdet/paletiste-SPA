@@ -21,9 +21,11 @@ export default function DisplayEvents({
   }, [fetchEvents]);
   return (
     <>
-      <section className="px-50 pt-10">
-        <h2 className="text-3xl mb-4 font-title">{title}</h2>
-        <div className="flex flex-wrap mx-auto justify-center pb-6 pb-20">
+      <section className="px-4 xxs:px-8 xl:px-50 pt-10">
+        <h2 className="text-3xl mb-4 font-title text-center xxs:text-left">
+          {title}
+        </h2>
+        <div className="xs:flex xs:flex-wrap mx-auto justify-center pb-6 pb-20">
           {eventsList.map((event) => (
             <EventCard event={event} />
           ))}

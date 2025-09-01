@@ -10,16 +10,16 @@ export default function EventCard({ event }: IEventCardProps) {
     <>
       <Link
         to="#"
-        className="block w-80 mx-auto pt-6 cursor-pointer hover:shadow-lg hover:rounded-md hover:transition-shadow"
+        className="block w-full max-w-80 mx-auto pt-6 cursor-pointer hover:shadow-lg hover:rounded-md hover:transition-shadow"
       >
-        <div className="h-130">
+        <div className="h-140">
           <div key={event.id}>
             <img
               src={`${apiBaseUrl}${event.poster}`}
               alt={`Couverture de ${event.title}`}
-              className="h-90 w-full object-contain mb-2 mx-auto"
-              width={180}
-              height={340}
+              className="h-auto max-h-100 w-full object-contain mb-2 mx-auto"
+              width={160}
+              height={320}
               loading="lazy"
             />
             <p className="font-body tracking-wider pb-2 pl-2">{event.date}</p>
