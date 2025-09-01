@@ -71,7 +71,7 @@ export default function Header() {
               id="params-menu"
               role="menu"
               aria-hidden={!isMenuOpen}
-              className={`fixed h-auto top-20 right-1 xl:right-20 pt-4 pr-6 w-auto  bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
+              className={`absolute h-auto top-20 right-1 xl:right-20 pt-4 pr-6 w-auto  bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
                 isMenuOpen ? "translate-y-0" : "-translate-y-full"
               }`}
             >
