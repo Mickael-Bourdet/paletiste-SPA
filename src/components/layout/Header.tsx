@@ -12,7 +12,7 @@ export default function Header() {
     setIsMenuOpen((open) => !open);
   };
   return (
-    <header className="py-4 px-8 border-b border-gray-300 dark:border-gray-700 xl:px-50 mdl:flex items-center">
+    <header className="py-4 px-8 bg-body border-b border-gray-300 dark:border-gray-700 xl:px-50 mdl:flex items-center mdl:sticky mdl:top-0 mdl:z-20">
       <div className="flex justify-center items-center mdl:hidden">
         <img
           src={
@@ -45,7 +45,7 @@ export default function Header() {
         <NavLink linkTo="/categories" label="Types de concours" />
         <NavLink linkTo="/calendrier" label="Calendrier" />
       </nav>
-      <div className="hidden mdl:flex items-baseline justify-center gap-4 flex-wrap">
+      <div className="hidden mdl:flex items-baseline justify-center gap-4 flex-wrap ">
         <i className="fa-solid fa-magnifying-glass border p-2 border-gray-300 bg-gray-300 dark:border-gray-700 dark:bg-gray-700 cursor-pointer"></i>
         <i className="fa-solid fa-user border p-2 border-gray-300 bg-gray-300 dark:border-gray-700 dark:bg-gray-700 cursor-pointer"></i>
         <button className="flex items-baseline rounded-full py-1 px-4 bg-royal text-body dark:text-primary text-sm cursor-pointer hover:outline-2 hover:outline-primary">
