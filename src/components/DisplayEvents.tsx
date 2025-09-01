@@ -14,6 +14,7 @@ export default function DisplayEvents({
   useEffect(() => {
     async function loadEvents() {
       const events = await fetchEvents();
+      console.log(events);
 
       setEventsList(events);
     }
@@ -25,9 +26,9 @@ export default function DisplayEvents({
         <h2 className="text-3xl mb-4 font-title text-center xxs:text-left">
           {title}
         </h2>
-        <div className="xs:flex xs:flex-wrap mx-auto justify-center pb-6 pb-20">
+        <div className="xs:flex xs:flex-wrap mx-auto justify-center pb-20 xs:gap-2">
           {eventsList.map((event) => (
-            <EventCard event={event} />
+            <EventCard event={event} key={event.id} />
           ))}
         </div>
       </section>

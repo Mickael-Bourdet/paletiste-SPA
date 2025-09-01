@@ -13,7 +13,7 @@ export interface IEvent {
   price: number;
   credit_card: boolean;
   status: string;
-  category: ICategory[];
+  category: ICategory;
   tags: ITags[];
   author: string;
   slug: string;
