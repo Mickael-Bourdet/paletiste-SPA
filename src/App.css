@@ -73,5 +73,5 @@
 }
 
 .button-primary {
-  @apply bg-primary text-body py-2 px-4 mx-auto block my-4 rounded-xl cursor-pointer hover:bg-primary-hover;
+  @apply bg-primary text-body py-2 px-4 mx-auto block mb-2 mt-4 rounded-xl cursor-pointer hover:bg-primary-hover;
 }
