@@ -56,6 +56,18 @@
 .badge-Bois {
   @apply text-primary dark:text-body;
 }
+.badge-Fonte {
+  @apply bg-Fonte;
+}
+.badge-Laiton {
+  @apply bg-Laiton;
+}
+.badge-Bois {
+  @apply bg-Bois;
+}
+.badge-Terre {
+  @apply bg-Terre;
+}
 .badge-Mixte {
   @apply bg-gradient-to-r from-[#3498DB] to-[#2C3E91];
 }

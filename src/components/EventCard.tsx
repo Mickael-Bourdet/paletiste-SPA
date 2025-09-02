@@ -24,9 +24,7 @@ export default function EventCard({ event }: IEventCardProps) {
             />
             <div className="flex justify-between pb-2 px-2">
               <p className="font-body tracking-wider ">{event.date}</p>
-              <span
-                className={`badge badge-${event.category.name} bg-${event.category.name}`}
-              >
+              <span className={`badge badge-${event.category.name}`}>
                 {event.category.name}
               </span>
             </div>

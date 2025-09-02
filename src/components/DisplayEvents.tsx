@@ -26,7 +26,7 @@ export default function DisplayEvents({
       }
     }
     loadEvents();
-  }, [fetchEvents]);
+  }, [fetchEvents, handleError]);
   return (
     <>
       <section className="px-4 xxs:px-16 xl:px-64 pt-10">
