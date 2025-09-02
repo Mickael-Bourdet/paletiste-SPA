@@ -12,7 +12,7 @@ export default function Header() {
     setIsMenuOpen((open) => !open);
   };
   return (
-    <header className="py-4 px-8 bg-body border-b border-gray-300 dark:border-gray-700 xl:px-50 mdl:flex items-center mdl:sticky mdl:top-0 mdl:z-20">
+    <header className="py-4 px-8 bg-body border-b border-gray-300 dark:border-gray-700 xlg:px-24 xl:px-50 mdl:flex items-center mdl:sticky mdl:top-0 mdl:z-20">
       <div className="flex justify-center items-center mdl:hidden">
         <img
           src={

@@ -29,6 +29,7 @@
   --breakpoint-xxs: 28.125rem; /* 450 px */
   --breakpoint-xs: 31.25rem; /* 500 px */
   --breakpoint-mdl: 60.938rem; /* 950 px */
+  --breakpoint-xlg: 71.875rem; /* 950 px */
 }
 
 .dark {
@@ -74,4 +75,12 @@
 
 .button-primary {
   @apply bg-primary text-body py-2 px-4 mx-auto block mb-2 mt-4 rounded-xl cursor-pointer hover:bg-primary-hover;
+}
+
+.mySwiper {
+  --swiper-pagination-color: var(--color-royal);
+  --swiper-pagination-bullet-inactive-color: #999999;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-size: 10px;
+  --swiper-pagination-bullet-horizontal-gap: 8px;
 }
