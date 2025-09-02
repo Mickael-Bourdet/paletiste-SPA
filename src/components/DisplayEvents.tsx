@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { IEvents } from "../@types/event";
 import EventCard from "../components/EventCard";
+import { useErrorHandler } from "../utils/useErrorHandler";
 
 interface IDisplayEventsProps {
   title: string;
@@ -11,12 +12,18 @@ export default function DisplayEvents({
   fetchEvents,
 }: IDisplayEventsProps) {
   const [eventsList, setEventsList] = useState<IEvents>([]);
+  const { handleError } = useErrorHandler();
+
   useEffect(() => {
     async function loadEvents() {
-      const events = await fetchEvents();
-      console.log(events);
+      try {
+        const events = await fetchEvents();
+        console.log(events);
 
-      setEventsList(events);
+        setEventsList(events);
+      } catch (error) {
+        handleError(error);
+      }
     }
     loadEvents();
   }, [fetchEvents]);

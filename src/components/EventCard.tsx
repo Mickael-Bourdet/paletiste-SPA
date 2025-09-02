@@ -38,9 +38,7 @@ export default function EventCard({ event }: IEventCardProps) {
             </p>
           </div>
         </div>
-        <button className="bg-primary text-body py-2 px-4 mx-auto block my-4 rounded-xl cursor-pointer hover:bg-primary-hover">
-          Voir les détails
-        </button>
+        <button className="button-primary">Voir les détails</button>
       </Link>
     </>
   );

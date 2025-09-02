@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Error404() {
+export default function Error500() {
   return (
     <div
       className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden px-4 text-center"
@@ -8,7 +8,7 @@ export default function Error404() {
     >
       {/* Texte principal */}
       <h1 className="text-6xl font-extrabold mb-4" style={{ color: "#1b2a49" }}>
-        404
+        500
       </h1>
       <h2 className="text-2xl font-semibold mb-6" style={{ color: "#1b2a49" }}>
         Oups ! Les palets se sont échappés...

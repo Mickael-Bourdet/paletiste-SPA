@@ -5,6 +5,8 @@ import Header from "./components/layout/Header";
 import HomePage from "./pages/HomePage";
 import { Route, Routes } from "react-router-dom";
 import Error404 from "./pages/Error404";
+import { ErrorBoundary } from "react-error-boundary";
+import Error500 from "./pages/Error500";
 
 function App() {
   return (
@@ -12,10 +14,16 @@ function App() {
     <div className="bg-body min-h-screen text-primary flex flex-col">
       <BackToTopPage />
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+
+      <ErrorBoundary
+        FallbackComponent={Error500}
+        resetKeys={[location.pathname]}
+      >
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </ErrorBoundary>
       <MobileNav />
     </div>
   );
