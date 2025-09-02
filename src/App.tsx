@@ -4,6 +4,7 @@ import MobileNav from "./components/layout/MobileNav";
 import Header from "./components/layout/Header";
 import HomePage from "./pages/HomePage";
 import { Route, Routes } from "react-router-dom";
+import Error404 from "./pages/Error404";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
       <MobileNav />
     </div>
