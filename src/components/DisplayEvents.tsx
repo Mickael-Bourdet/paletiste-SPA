@@ -33,33 +33,33 @@ export default function DisplayEvents({
   }, [fetchEvents, handleError]);
   return (
     <>
-      <section className="px-4 xxs:px-16 xlg:px-32 xl:px-60 pt-10">
-        <h2 className="text-3xl mb-4 font-title text-center xxs:text-left">
-          {title}
-        </h2>
-        <Swiper
-          slidesPerView={1}
-          spaceBetween={20}
-          loop={true}
-          pagination={{
-            clickable: true,
-          }}
-          breakpoints={{
-            300: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            850: { slidesPerView: 2 },
-            1450: { slidesPerView: 3 },
-            1750: { slidesPerView: 4 },
-          }}
-          modules={[Pagination, Navigation, A11y]}
-          className="mySwiper h-180"
-        >
-          {eventsList.map((event) => (
-            <SwiperSlide>
-              <EventCard event={event} key={event.id} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <section className="pt-10">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl mb-4 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:p-0">
+            {title}
+          </h2>
+
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={20}
+            loop={true}
+            pagination={{ clickable: true }}
+            breakpoints={{
+              300: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1450: { slidesPerView: 3 },
+              1750: { slidesPerView: 4 },
+            }}
+            modules={[Pagination, Navigation, A11y]}
+            className="mySwiper h-160 overflow-visible"
+          >
+            {eventsList.map((event) => (
+              <SwiperSlide key={event.id}>
+                <EventCard event={event} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </section>
     </>
   );

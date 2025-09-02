@@ -28,8 +28,8 @@
   --font-body: "Raleway", sans-serif;
   --breakpoint-xxs: 28.125rem; /* 450 px */
   --breakpoint-xs: 31.25rem; /* 500 px */
-  --breakpoint-mdl: 60.938rem; /* 950 px */
-  --breakpoint-xlg: 71.875rem; /* 950 px */
+  --breakpoint-mdl: 59.375rem; /* 950 px */
+  --breakpoint-xlg: 71.875rem; /* 1150 px */
 }
 
 .dark {
@@ -50,7 +50,7 @@
 }
 
 .badge {
-  @apply font-body text-sm text-body font-bold px-2 py-1 rounded-xl dark:text-primary;
+  @apply font-body text-xs text-body font-bold px-2 py-1 rounded-xl dark:text-primary;
 }
 
 .badge-Laiton,
