@@ -33,12 +33,11 @@ export default function DisplayEvents({
   }, [fetchEvents, handleError]);
   return (
     <>
-      <section className="pt-10">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pb-10">
+        <div className="wrapper">
           <h2 className="text-3xl mb-4 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:p-0">
             {title}
           </h2>
-
           <Swiper
             slidesPerView={1}
             spaceBetween={20}

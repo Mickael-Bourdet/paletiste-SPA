@@ -40,6 +40,10 @@
   --color-sideMenu: #1f2937;
 }
 
+.wrapper {
+  @apply md:w-[95%] xlg:w-[90%] xlg:max-w-[1350px] mx-auto;
+}
+
 .underline-link {
   @apply relative 
                after:content-[''] after:absolute after:left-0 after:-bottom-1 
