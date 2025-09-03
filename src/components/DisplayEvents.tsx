@@ -35,7 +35,7 @@ export default function DisplayEvents({
     <>
       <section className="py-10">
         <div className="wrapper">
-          <h2 className="text-3xl mb-4 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:p-0">
+          <h2 className="text-3xl mb-4 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:pl-10 2xl:pl-0">
             {title}
           </h2>
           <Swiper
@@ -46,7 +46,7 @@ export default function DisplayEvents({
             breakpoints={{
               300: { slidesPerView: 1 },
               768: { slidesPerView: 2 },
-              1450: { slidesPerView: 3 },
+              1200: { slidesPerView: 3 },
               1750: { slidesPerView: 4 },
             }}
             modules={[Pagination, Navigation, A11y]}
