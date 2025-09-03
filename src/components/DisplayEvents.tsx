@@ -33,7 +33,7 @@ export default function DisplayEvents({
   }, [fetchEvents, handleError]);
   return (
     <>
-      <section className="pb-10">
+      <section className="py-10">
         <div className="wrapper">
           <h2 className="text-3xl mb-4 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:p-0">
             {title}
