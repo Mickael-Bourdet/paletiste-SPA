@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import Error404 from "./pages/Error404";
 import { ErrorBoundary } from "react-error-boundary";
 import Error500 from "./pages/Error500";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/events/:slug" element={<EventDetails />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </ErrorBoundary>

@@ -1,4 +1,4 @@
-import type { IEvents } from "../@types/event";
+import type { IEvent, IEvents } from "../@types/event";
 
 const apiBaseUrl = import.meta.env.VITE_API_URL;
 
@@ -21,4 +21,23 @@ export async function getAllEvents(): Promise<IEvents> {
 
   const events = await response.json();
   return events;
+}
+
+/**
+ * @function getEventBySlug
+ * @description Fetches a single event from the API using its slug.
+ *
+ * @param {string} slug - The slug of the event.
+ * @returns {Promise<IEvent>} A promise that resolves to the event object.
+ *
+ * @throws Throws an error if the request fails or if there is an issue with the network.
+ */
+export async function getEventBySlug(slug: string): Promise<IEvent> {
+  const response = await fetch(`${apiBaseUrl}/events/slug/${slug}`);
+  if (!response.ok) {
+    throw new Error(
+      `Erreur lors de la récupération du concours: ${response.statusText}`
+    );
+  }
+  return response.json();
 }
