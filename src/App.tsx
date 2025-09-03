@@ -22,7 +22,7 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/events/:slug" element={<EventDetails />} />
+          <Route path="/concours/:slug" element={<EventDetails />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </ErrorBoundary>

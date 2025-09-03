@@ -9,7 +9,7 @@ export default function EventCard({ event }: IEventCardProps) {
   return (
     <>
       <Link
-        to={`/events/${event.slug}`}
+        to={`/concours/${event.slug}`}
         className="block w-full max-w-70 mx-auto pb-2 cursor-pointer hover:shadow-[0px_12px_15px_2px] hover:rounded-md hover:transition-shadow hover:shadow-primary"
       >
         <div className="h-130">
