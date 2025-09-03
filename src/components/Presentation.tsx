@@ -1,3 +1,5 @@
+import Searchbar from "./SearchBar";
+
 export default function Presentation() {
   return (
     <>
@@ -12,6 +14,7 @@ export default function Presentation() {
             France, trouvez l’événement qui vous correspond, quel que soit votre
             niveau ou votre type de palet.
           </p>
+          <Searchbar />
         </div>
       </section>
     </>
