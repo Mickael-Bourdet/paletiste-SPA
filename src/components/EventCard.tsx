@@ -21,7 +21,9 @@ export default function EventCard({ event }: IEventCardProps) {
               loading="lazy"
             />
             <div className="flex justify-between pb-2 px-2">
-              <p className="font-body tracking-wider text-sm ">{event.date}</p>
+              <p className="font-body tracking-wider text-sm ">
+                {event.dateFormatted}
+              </p>
               <span className={`badge badge-${event.category.name}`}>
                 {event.category.name}
               </span>
@@ -30,7 +32,7 @@ export default function EventCard({ event }: IEventCardProps) {
               {event.title.toUpperCase()}
             </p>
             <p className="font-body tracking-wider pb-2 pl-2 italic text-sm">
-              85000 Saint-Martin-Lars-en-Sainte-Hermine
+              {event.postalCode} {event.city}
             </p>
           </div>
         </div>
