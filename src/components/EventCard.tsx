@@ -32,7 +32,7 @@ export default function EventCard({ event }: IEventCardProps) {
               {event.title.toUpperCase()}
             </p>
             <p className="font-body tracking-wider pb-2 pl-2 italic text-sm">
-              {event.postalCode} {event.city}
+              {event.city} ({event.postalCode.substring(0, 2)})
             </p>
           </div>
         </div>

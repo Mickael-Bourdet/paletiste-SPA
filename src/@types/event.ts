@@ -1,15 +1,21 @@
 export interface IEvent {
   id: string;
+  eventType: string;
   title: string;
   organizer: string;
+  organizerType: string;
   poster: string;
-  location: string;
+  streetAddress: string;
+  postalCode: string;
+  city: string;
   date: string;
+  dateFormatted: string;
   description: string;
   registration_time: string;
   start_time: string;
   reservation: IReservation[];
-  nb_teams: number;
+  maxTeams: number;
+  teamType: number;
   price: number;
   credit_card: boolean;
   status: string;
