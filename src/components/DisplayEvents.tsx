@@ -67,7 +67,7 @@ export default function DisplayEvents({
         {hasButton ? (
           <div className="text-center mt-4">
             <Link
-              to={buttonLink}
+              to={buttonLink ?? "/events"}
               className="group relative inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-300/60 dark:border-white/10 
             font-title md:text-lg bg-white/60 dark:bg-slate-800/40 backdrop-blur-sm shadow-sm hover:shadow-md dark:shadow-[#2c2f42]
             transition-all duration-300 hover:border-royal/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 "

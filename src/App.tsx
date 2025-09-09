@@ -21,6 +21,7 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/categories/{categorie.name}" element={<HomePage />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </ErrorBoundary>
