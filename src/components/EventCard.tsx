@@ -31,7 +31,7 @@ export default function EventCard({ event }: IEventCardProps) {
             <p className="text-base font-subtitle font-bold tracking-wider pb-2 pl-2">
               {event.title.toUpperCase()}
             </p>
-            <p className="font-body tracking-wider pb-2 pl-2 italic text-sm">
+            <p className="font-subtitle tracking-wider pb-2 pl-2 italic text-sm">
               {event.city} ({event.postalCode.substring(0, 2)})
             </p>
           </div>
