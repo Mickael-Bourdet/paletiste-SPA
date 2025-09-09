@@ -13,14 +13,19 @@ export default function HomePage() {
       <DisplayEvents
         title="Évènements à venir"
         fetchEvents={getUpcomingEvents}
+        hasButton={true}
+        buttonLink="/events"
       />
       <DisplayEvents
         title="Prochain évènement majeur"
         fetchEvents={getMajorEvents}
+        hasButton={false}
       />
       <DisplayEvents
         title="Derniers concours enregistrés"
         fetchEvents={getLatestAddedEvents}
+        hasButton={true}
+        buttonLink="/events"
       />
     </>
   );
