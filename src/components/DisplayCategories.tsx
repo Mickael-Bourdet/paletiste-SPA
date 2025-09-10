@@ -38,14 +38,14 @@ export default function DisplayCategories() {
     "relative h-50 rounded-xl overflow-hidden block focus:outline-none focus-visible:ring-2 focus-visible:ring-royal/30";
 
   return (
-    <section className="wrapper py-10">
+    <section className="wrapper py-8">
       <h2 className="titleStyle">Les concours par catégories</h2>
       <div className="mt-2">
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 w-full max-w-6xl mx-auto px-4 md:px-6">
+        <div className="bodyWrapper flex flex-wrap justify-around">
           {categories.map((category) => (
             <div
               key={category.slug}
-              className="basis-full xxs:basis-1/2 sm:basis-1/3 lg:basis-1/4 xl:[flex-basis:20%]"
+              className="basis-[90%] md:basis-[48%] lg:basis-[31%]  xl:[flex-basis:18%]"
             >
               <Link
                 to={`/events?category=${category.slug}`}

@@ -38,7 +38,7 @@ export default function DisplayEvents({
   }, [fetchEvents, handleError]);
   return (
     <>
-      <section className="py-10">
+      <section className="py-8">
         <div className="wrapper">
           <h2 className="titleStyle">{title}</h2>
           <Swiper
