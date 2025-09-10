@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 export default function DisplayCategories() {
   return (
     <div className="wrapper py-10">
-      <h2 className="text-3xl mb-6 font-title md:text-left md:pl-6 mdl:pl-14 xlg:pl-10 2xl:pl-0">
+      <h2 className="text-3xl mb-6 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:pl-10 2xl:pl-0">
         Les concours par catégories
       </h2>
-      <ul className="wrapper flex justify-between items-baseline flex-wrap gap-6">
+      <ul className="flex flex-col md:flex-row justify-between items-baseline flex-wrap gap-6">
         <li className="relative max-w-xs w-90 mx-auto">
           <Link to="/events?category=fonte">
             <div className="h-50 relative">
