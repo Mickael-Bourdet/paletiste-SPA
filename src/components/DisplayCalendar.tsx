@@ -20,11 +20,9 @@ export default function DisplayCalendar() {
   return (
     <>
       <section className="wrapper py-10">
-        <h2 className="text-3xl mb-6 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:pl-10 2xl:pl-0">
-          Les concours par mois
-        </h2>
+        <h2 className="titleStyle">Les concours par mois</h2>
         <div className="mt-2">
-          <div className="grid grid-cols-1 xxs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6 w-full max-w-8xl mx-auto pl-1 xxs:px-2 sm:px-6 md:px-10 mdl:px-20 xlg:px-16 xl:px-10 2xl:px-4">
+          <div className="grid grid-cols-1 xxs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6 w-full max-w-8xl mx-auto px-2 xxs:px-2 sm:px-6 md:px-10 mdl:px-20 xlg:px-16 xl:px-10 2xl:px-4">
             {months.map((month) => (
               <div
                 key={month.name}

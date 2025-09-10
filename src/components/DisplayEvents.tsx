@@ -40,9 +40,7 @@ export default function DisplayEvents({
     <>
       <section className="py-10">
         <div className="wrapper">
-          <h2 className="text-3xl mb-6 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:pl-10 2xl:pl-0">
-            {title}
-          </h2>
+          <h2 className="titleStyle">{title}</h2>
           <Swiper
             slidesPerView={1}
             spaceBetween={20}
