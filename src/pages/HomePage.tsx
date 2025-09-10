@@ -3,6 +3,7 @@ import {
   getMajorEvents,
   getUpcomingEvents,
 } from "../api/eventAPI";
+import DisplayCalendar from "../components/DisplayCalendar";
 import DisplayCategories from "../components/DisplayCategories";
 import DisplayEvents from "../components/DisplayEvents";
 import Presentation from "../components/Presentation";
@@ -24,6 +25,7 @@ export default function HomePage() {
       />
 
       <DisplayCategories />
+      <DisplayCalendar />
       <DisplayEvents
         title="Derniers concours enregistrés"
         fetchEvents={getLatestAddedEvents}

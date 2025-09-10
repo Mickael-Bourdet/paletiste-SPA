@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 export default function DisplayCategories() {
   return (
-    <div className="wrapper py-10">
+    <section className="wrapper py-10">
       <h2 className="text-3xl mb-6 font-title text-center md:text-left md:pl-6 mdl:pl-14 xlg:pl-10 2xl:pl-0">
         Les concours par catégories
       </h2>
-      <ul className="flex flex-col md:flex-row justify-between items-baseline flex-wrap gap-6">
-        <li className="relative max-w-xs w-90 mx-auto">
+      <ul className="flex flex-col md:flex-row flex-wrap gap-4 items-center xlg:grid xlg:grid-cols-5">
+        <li className="relative w-full max-w-[250px] md:w-90 mdl:w-110 mx-auto xlg:w-80">
           <Link to="/events?category=fonte">
             <div className="h-50 relative">
               <img
@@ -29,7 +29,7 @@ export default function DisplayCategories() {
             </div>
           </Link>
         </li>
-        <li className="relative max-w-xs w-90 mx-auto">
+        <li className="relative w-full max-w-[250px] md:w-90 mdl:w-110 mx-auto xlg:w-80">
           <Link to="/categories/laiton">
             <div className="h-50 relative">
               <img
@@ -51,7 +51,7 @@ export default function DisplayCategories() {
             </div>
           </Link>
         </li>
-        <li className="relative max-w-xs w-90 mx-auto">
+        <li className="relative w-full max-w-xs 2xl:max-w-[250px] md:w-90 mdl:w-110 mx-auto xlg:w-80">
           <Link to="/categories/bois">
             <div className="h-50 relative">
               <img
@@ -73,7 +73,7 @@ export default function DisplayCategories() {
             </div>
           </Link>
         </li>
-        <li className="relative max-w-xs w-90 mx-auto">
+        <li className="relative w-full max-w-[250px] md:w-90 mdl:w-110 mx-auto xlg:w-80">
           <Link to="categories/terre">
             <div className="h-50 relative">
               <img
@@ -95,7 +95,7 @@ export default function DisplayCategories() {
             </div>
           </Link>
         </li>
-        <li className="relative max-w-xs w-90 mx-auto">
+        <li className="relative w-full max-w-[250px] md:w-90 mdl:w-110 mx-auto xlg:w-80">
           <div className="h-50 relative">
             <img
               src={`/img/categories/terre.webp`}
@@ -116,6 +116,6 @@ export default function DisplayCategories() {
           </div>
         </li>
       </ul>
-    </div>
+    </section>
   );
 }
