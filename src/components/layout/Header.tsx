@@ -59,7 +59,7 @@ export default function Header() {
             aria-controls="params-menu"
             aria-label="Ouvrir le menu des paramètres"
           >
-            <i className="fa-solid fa-gear text-xl"></i>
+            <i className="fa-solid fa-gear text-xl cursor-pointer"></i>
           </button>
           {isMenuOpen && (
             <>

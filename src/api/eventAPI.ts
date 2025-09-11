@@ -1,4 +1,4 @@
-import type { IEvents } from "../@types/event";
+import type { IEvent, IEvents } from "../@types/event";
 
 const apiBaseUrl = import.meta.env.VITE_API_URL;
 
@@ -33,7 +33,7 @@ export async function getUpcomingEvents(): Promise<IEvents> {
   const events = await response.json();
   return events;
 }
-export async function getMajorEvents(): Promise<IEvents> {
+export async function getMajorEvent(): Promise<IEvent> {
   const response = await fetch(`${apiBaseUrl}/events/major`);
   if (!response.ok) {
     throw new Error(
@@ -41,8 +41,8 @@ export async function getMajorEvents(): Promise<IEvents> {
     );
   }
 
-  const events = await response.json();
-  return events;
+  const event = await response.json();
+  return event as IEvent;
 }
 export async function getLatestAddedEvents(): Promise<IEvents> {
   const response = await fetch(`${apiBaseUrl}/events/latest`);
