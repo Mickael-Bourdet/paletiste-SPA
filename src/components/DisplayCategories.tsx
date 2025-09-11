@@ -35,7 +35,10 @@ export default function DisplayCategories() {
   ];
 
   const cardClassName =
-    "relative h-50 rounded-xl overflow-hidden block focus:outline-none focus-visible:ring-2 focus-visible:ring-royal/30";
+    "relative h-50 rounded-xl overflow-hidden block focus:outline-none focus-visible:ring-2 focus-visible:ring-royal/30 " +
+    "transition-all duration-500 ease-in-out " +
+    "hover:scale-105 hover:rotate-2 hover:shadow-[0_8px_32px_0_rgba(58,95,205,0.25)] " +
+    "hover:after:content-[''] hover:after:absolute hover:after:inset-0 hover:after:bg-gradient-to-t hover:after:from-royal/40 hover:after:to-transparent hover:after:transition-opacity hover:after:duration-500 hover:after:opacity-100";
 
   return (
     <section className="wrapper py-8">
