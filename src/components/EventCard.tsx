@@ -41,7 +41,7 @@ export default function EventCard({ event }: IEventCardProps) {
               </div>
             </div>
 
-            <h3 className="font-title text-base md:text-lg text-primary dark:text-primary leading-snug line-clamp-3 ">
+            <h3 className="font-title text-base md:text-lg text-primary dark:text-primary leading-snug line-clamp-2 ">
               {event.title}
             </h3>
             <span className="font-subtitle italic">
@@ -49,7 +49,11 @@ export default function EventCard({ event }: IEventCardProps) {
             </span>
 
             <div className="mt-2 flex items-center justify-end">
-              <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-300/60 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 backdrop-blur-sm text-sm font-title transition-colors duration-300 group-hover:border-royal/60">
+              <span
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg 
+              border border-slate-300/60 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 backdrop-blur-sm text-sm font-title 
+              transition-colors duration-300 group-hover:border-royal/60"
+              >
                 Détails
                 <svg
                   className="h-4 w-4 text-royal/80 transition-transform duration-300 group-hover:translate-x-0.5"
