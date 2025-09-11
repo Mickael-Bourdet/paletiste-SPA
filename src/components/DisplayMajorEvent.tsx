@@ -3,7 +3,7 @@ import type { IEvent } from "../@types/event";
 import { getMajorEvent } from "../api/eventAPI";
 import { Link } from "react-router-dom";
 
-export default function SpotlightMajorEvent() {
+export default function DisplayMajorEvent() {
   const [event, setEvent] = useState<IEvent | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const apiBaseUrl = import.meta.env.VITE_API_URL;
@@ -49,12 +49,18 @@ export default function SpotlightMajorEvent() {
     <section className="py-8">
       <div className="wrapper">
         <h2 className="titleStyle">Prochain concours majeur</h2>
-        <div className="bodyWrapper relative grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-          <div className="relative group rounded-3xl overflow-hidden min-h-[360px] lg:min-h-[520px] shadow-xl dark:shadow-[0_24px_60px_rgba(0,0,0,0.6)]">
+        <div className="bodyWrapper relative grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
+          <div className="flex items-center justify-center relative rounded-3xl overflow-hidden min-h-[220px] sm:min-h-[300px] md:min-h-[340px] lg:min-h-[520px] dark:shadow-[0_24px_60px_rgba(0,0,0,0.6)]  dark:bg-slate-700">
             <img
               src={`${apiBaseUrl}${event.poster}`}
               alt={event.title}
-              className="absolute inset-0 w-600 h-full object-cover brightness-90 transition-transform duration-700 ease-out group-hover:scale-105 group-hover:rotate-[0.5deg]"
+              className="
+                w-auto h-full max-h-[340px] sm:max-h-[380px] md:max-h-[420px] lg:max-h-[500px] 
+                object-contain mx-auto transition-transform duration-700 ease-out
+                group-hover:scale-105 group-hover:rotate-[0.5deg]
+                rounded-2xl
+                shadow-lg
+                "
             />
           </div>
 
@@ -105,7 +111,7 @@ export default function SpotlightMajorEvent() {
                 to={`/events/${event.slug}`}
                 className="flex-1 group relative inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-300/60 dark:border-white/10 font-title md:text-lg bg-white/80 dark:bg-slate-800/40 backdrop-blur-sm shadow-sm hover:shadow-md dark:shadow-[#2c2f42] transition-all duration-300 hover:border-royal/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
               >
-                <span className="relative z-[1]">Voir le programme</span>
+                <span className="relative z-[1]">Voir les informations</span>
                 <span
                   aria-hidden
                   className="pointer-events-none absolute inset-0 rounded-xl overflow-hidden"

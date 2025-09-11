@@ -2,8 +2,9 @@ import { getLatestAddedEvents, getUpcomingEvents } from "../api/eventAPI";
 import DisplayCalendar from "../components/DisplayCalendar";
 import DisplayCategories from "../components/DisplayCategories";
 import DisplayEvents from "../components/DisplayEvents";
+import DisplayMajorEvent from "../components/DisplayMajorEvent";
 import Presentation from "../components/Presentation";
-import SpotlightMajorEvent from "../components/SpotlightMajorEvent";
+// import SpotlightMajorEvent from "../components/SpotlightMajorEvent";
 
 export default function HomePage() {
   return (
@@ -15,8 +16,9 @@ export default function HomePage() {
         hasButton={true}
         buttonLink="/events"
       />
-      <SpotlightMajorEvent />
+      {/* <SpotlightMajorEvent /> */}
 
+      <DisplayMajorEvent />
       <DisplayCategories />
       <DisplayCalendar />
       <DisplayEvents
