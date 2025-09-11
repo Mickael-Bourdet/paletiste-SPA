@@ -11,13 +11,13 @@ export interface IEvent {
   date: string;
   dateFormatted: string;
   description: string;
-  registration_time: string;
-  start_time: string;
+  registrationTime: string;
+  startTime: string;
   reservation: IReservation[];
   maxTeams: number;
   teamType: number;
   price: number;
-  credit_card: boolean;
+  creditCard: boolean;
   status: string;
   category: ICategory;
   tags: ITags[];

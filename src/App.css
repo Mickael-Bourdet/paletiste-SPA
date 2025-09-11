@@ -79,7 +79,7 @@
 .badge-Terre {
   @apply bg-Terre;
 }
-.badge-Mixte {
+.badge-Multi {
   @apply bg-gradient-to-r from-[#3498DB] to-[#2C3E91];
 }
 
