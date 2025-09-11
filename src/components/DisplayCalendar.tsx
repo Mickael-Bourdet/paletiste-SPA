@@ -26,9 +26,12 @@ export default function DisplayCalendar() {
             {months.map((month) => (
               <div
                 key={month.name}
-                className="border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/60 
-                rounded-xl flex flex-col items-center justify-center w-full sm:w-40 md:w-full 2xl:w-50 min-h-[130px] py-6 
-                shadow-sm dark:shadow-[#2c2f42] hover:shadow-md transition-shadow duration-200"
+                className="border-2 border-slate-300/40 dark:border-slate-600/40 
+           bg-body-second/80 dark:bg-sideMenu/10 
+           rounded-2xl flex flex-col items-center justify-center w-full sm:w-40 md:w-full 2xl:w-50 
+           min-h-[130px] py-6
+           shadow-lg dark:shadow-[0_8px_24px_rgba(0,0,0,0.6)] backdrop-blur-sm hover:cursor-pointer transition-all duration-300
+           hover:shadow-lg hover:shadow-royal/30 hover:scale-[1.1]"
               >
                 <p className="font-subtitle font-bold text-xl md:text-2xl text-primary dark:text-primary mb-4">
                   {month.name}
