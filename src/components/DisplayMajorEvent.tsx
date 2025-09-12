@@ -50,7 +50,7 @@ export default function DisplayMajorEvent() {
       <div className="wrapper">
         <h2 className="titleStyle">Prochain concours majeur</h2>
         <div className="bodyWrapper relative grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch">
-          <div className="flex items-center justify-center relative rounded-3xl overflow-hidden min-h-[220px] sm:min-h-[300px] md:min-h-[340px] lg:min-h-[520px] dark:shadow-[0_24px_60px_rgba(0,0,0,0.6)]  dark:bg-slate-700">
+          <div className="flex items-center justify-center relative rounded-3xl overflow-hidden min-h-[220px] sm:min-h-[300px] md:min-h-[340px] lg:min-h-[520px]  ">
             <img
               src={`${apiBaseUrl}${event.poster}`}
               alt={event.title}
