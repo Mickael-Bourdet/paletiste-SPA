@@ -12,7 +12,10 @@ export default function EventCard({ event }: IEventCardProps) {
         to={event.slug}
         className="group block w-full max-w-70 mx-auto cursor-pointer"
       >
-        <article className="rounded-2xl overflow-hidden border-2 border-slate-300/40 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 backdrop-blur-sm shadow transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:border-primary/30">
+        <article
+          className="rounded-2xl overflow-hidden border-2 border-slate-300/40 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 backdrop-blur-sm 
+        shadow transition-all duration-300 hover:shadow-lg hover:shadow-primary/40 hover:border-primary/30"
+        >
           <div className="relative h-70">
             <img
               src={`${apiBaseUrl}${event.poster}`}
