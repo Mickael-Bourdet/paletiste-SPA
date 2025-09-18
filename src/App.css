@@ -44,7 +44,7 @@
   @apply md:w-[90%] xlg:w-[85%] xlg:max-w-[1250px] mx-auto;
 }
 .bodyWrapper {
-  @apply gap-4 md:gap-6 w-full mx-auto px-4 xxs:px-4 sm:px-8 md:px-12 mdl:px-22 xlg:px-18 xl:px-12 2xl:px-6;
+  @apply gap-4 md:gap-6 w-full mx-auto px-4 xxs:px-4 sm:px-8 md:px-12 mdl:px-22 xlg:px-18 xl:px-10 2xl:px-2;
 }
 .titleStyle {
   @apply text-3xl mb-6 font-title text-center md:text-left px-4 md:pl-6 mdl:pl-14 xlg:pl-10 2xl:pl-0;
