@@ -30,8 +30,8 @@ export default function Footer() {
             </div>
             <p className="mt-4 text-sm text-slate-600 dark:text-slate-300 max-w-prose">
               La plateforme pour découvrir, suivre et participer aux concours de
-              palets partout en France. Retrouvez les majeurs, les catégories et
-              les dernières actualités de la scène.
+              palet partout en France. Retrouvez les évènements, les différentes
+              catégories et styles de jeu : fonte, laiton, bois ou terre.
             </p>
           </div>
 

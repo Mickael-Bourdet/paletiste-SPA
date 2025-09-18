@@ -24,7 +24,7 @@ export default function Presentation() {
           </h2>
           <p className="md:gap-6 w-full mx-auto px-6 xs:px-8 md:px-8 mdl:px-14 xlg:px-12 xl:px-12 2xl:px-0 max-w-3xl md:max-w-6xl  text-left text-lg text-primary leading-relaxed dark:text-placeholder">
             Amateurs, passionnés ou compétiteurs, découvrez facilement les
-            tournois de palet près de chez vous. Du tournoi local à la Coupe de
+            concours de palet près de chez vous. Du tournoi local à la Coupe de
             France, trouvez l’événement qui vous correspond, quel que soit votre
             niveau ou votre type de palet.
           </p>
