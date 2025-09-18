@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import type { IEvents } from "../@types/event";
 import EventCard from "../components/EventCard";
-import EventCardBis from "./EventCardBis";
 import { useErrorHandler } from "../utils/useErrorHandler";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination } from "swiper/modules";
@@ -59,7 +58,6 @@ export default function DisplayEvents({
             {eventsList.map((event) => (
               <SwiperSlide key={event.id}>
                 <EventCard event={event} />
-                {/* <EventCardBis event={event} /> */}
               </SwiperSlide>
             ))}
           </Swiper>

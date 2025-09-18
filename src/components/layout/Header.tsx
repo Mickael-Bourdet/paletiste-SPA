@@ -1,16 +1,9 @@
-import { useState } from "react";
 import { useThemeMode } from "../../utils/useThemeMode";
 import NavLink from "./NavLink";
-import ToggleThemeMode from "./ToggleThemeMode";
 import { Link } from "react-router-dom";
 
 export default function Header() {
-  const { theme } = useThemeMode();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen((open) => !open);
-  };
+  const { theme, toggleTheme } = useThemeMode();
   return (
     <header className="py-4 px-8 bg-body border-b border-gray-300 dark:border-gray-700  mdl:sticky mdl:top-0 mdl:z-20">
       <div className="wrapper mdl:flex items-center">
@@ -46,40 +39,55 @@ export default function Header() {
           <NavLink linkTo="/categories" label="Types de concours" />
           <NavLink linkTo="/calendrier" label="Calendrier" />
         </nav>
-        <div className="hidden mdl:flex items-baseline justify-center gap-4 flex-wrap ">
-          <i className="fa-solid fa-magnifying-glass border p-2 border-gray-300 bg-gray-300 dark:border-gray-700 dark:bg-gray-700 cursor-pointer"></i>
-          <i className="fa-solid fa-user border p-2 border-gray-300 bg-gray-300 dark:border-gray-700 dark:bg-gray-700 cursor-pointer"></i>
-          <button className="flex items-baseline rounded-full py-1 px-4 bg-royal text-body dark:text-primary text-sm cursor-pointer hover:outline-2 hover:outline-primary">
-            <i className="fa-solid fa-plus"></i>
-            <span className="pl-2 text-lg">Poster</span>
-          </button>
-          <button
-            onClick={toggleMenu}
-            aria-expanded={isMenuOpen}
-            aria-controls="params-menu"
-            aria-label="Ouvrir le menu des paramètres"
+        <div className="hidden mdl:flex items-center justify-center gap-2 xl:gap-3 whitespace-nowrap">
+          <Link
+            to="/search"
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-200/70 dark:bg-gray-700/60 px-2 py-2 hover:bg-gray-300/80 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Rechercher des concours"
+            title="Rechercher"
           >
-            <i className="fa-solid fa-gear text-xl cursor-pointer"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <span className="hidden xl:inline text-sm">Rechercher</span>
+          </Link>
+
+          <Link
+            to="/auth"
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-200/70 dark:bg-gray-700/60 px-2 py-2 hover:bg-gray-300/80 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Se connecter ou s'inscrire"
+            title="Se connecter / S'inscrire"
+          >
+            <i className="fa-solid fa-user"></i>
+            <span className="hidden xl:inline text-sm">Se connecter</span>
+          </Link>
+
+          <Link
+            to="/poster"
+            className="inline-flex items-center gap-2 rounded-xl bg-royal hover:bg-royal-hover text-white px-3 py-2 transition-colors"
+            aria-label="Publier un nouvel évènement"
+            title="Publier un évènement"
+          >
+            <i className="fa-solid fa-plus"></i>
+            <span className="hidden xl:inline text-sm font-title">Publier</span>
+          </Link>
+
+          <button
+            onClick={toggleTheme}
+            aria-label="Basculer le thème clair/sombre"
+            title={theme === "dark" ? "Mode sombre" : "Mode clair"}
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-200/70 dark:bg-gray-700/60 px-2 py-2 hover:bg-gray-300/80 dark:hover:bg-gray-700 transition-colors"
+          >
+            {theme === "dark" ? (
+              <>
+                <i className="fa-solid fa-moon"></i>
+                <span className="hidden xl:inline text-sm">Sombre</span>
+              </>
+            ) : (
+              <>
+                <i className="fa-solid fa-sun"></i>
+                <span className="hidden xl:inline text-sm">Clair</span>
+              </>
+            )}
           </button>
-          {isMenuOpen && (
-            <>
-              <div
-                className="fixed inset-0 z-10"
-                onClick={() => setIsMenuOpen(false)}
-                aria-hidden="true"
-              ></div>
-              <div
-                id="params-menu"
-                role="menu"
-                aria-hidden={!isMenuOpen}
-                className={`absolute h-auto top-20 right-1 xl:right-20 pt-4 pr-6 w-auto  bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
-                  isMenuOpen ? "translate-y-0" : "-translate-y-full"
-                }`}
-              >
-                <ToggleThemeMode />
-              </div>
-            </>
-          )}
         </div>
       </div>
     </header>
