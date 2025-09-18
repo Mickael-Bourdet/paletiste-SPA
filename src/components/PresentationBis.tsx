@@ -17,27 +17,13 @@ export default function PresentationBis() {
 
   return (
     <section className="relative overflow-hidden py-12 md:py-16">
-      {/* Décor de fond */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-body-second/60 to-transparent dark:from-white/5"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-royal/15 blur-3xl dark:bg-royal/25"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-hover/10 blur-3xl dark:bg-white/10"
-      />
-
       <div className="wrapper">
-        <div className="bodyWrapper grid grid-cols-1 items-center gap-8">
-          <header className="text-center md:text-left">
-            <h2 className="titleStyle">
+        <div className="bodyWrapper grid grid-cols-1 xl:grid-cols-2 items-center gap-10 md:gap-12">
+          <header className="text-center space-y-4">
+            <h2 className="titleStyle md:text-center">
               Tous les concours de palet au même endroit
             </h2>
-            <p className="mx-auto md:mx-0 max-w-3xl text-lg text-gray-700 leading-relaxed dark:text-placeholder">
+            <p className="mx-auto max-w-3xl text-left text-lg text-gray-700 leading-relaxed dark:text-placeholder">
               Amateurs, passionnés ou compétiteurs, découvrez facilement les
               tournois de palet près de chez vous. Du tournoi local à la Coupe
               de France, trouvez l’événement qui vous correspond, quel que soit
@@ -45,13 +31,12 @@ export default function PresentationBis() {
             </p>
           </header>
 
-          {/* Barre de recherche moderne */}
-          <div className="mx-auto md:mx-0 w-full max-w-3xl">
+          {/* Modern search bar */}
+          <div className="mx-auto w-full max-w-3xl">
             <form
               onSubmit={handleSubmit}
               className="group relative rounded-2xl border border-slate-300/50 dark:border-white/10 bg-white/70 dark:bg-slate-900/30 backdrop-blur-md shadow-xl focus-within:shadow-2xl transition-shadow duration-300"
             >
-              {/* Accent gradient border */}
               <span
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-2xl [mask-image:radial-gradient(80%_60%_at_50%_0%,black,transparent)]"
@@ -60,9 +45,8 @@ export default function PresentationBis() {
                     "linear-gradient(120deg, rgba(58,95,205,0.35), rgba(74,108,247,0.15), rgba(191,91,4,0.2))",
                 }}
               />
-
-              <div className="relative flex items-center gap-3 px-4 md:px-5 py-3 md:py-4">
-                <span className="relative grid place-items-center h-9 w-9 rounded-xl bg-royal/15 text-royal dark:text-white/90">
+              <div className="relative flex items-center gap-3 px-5 md:px-6 py-4 md:py-5">
+                <span className="relative grid place-items-center p-1 rounded-full bg-royal/15 text-royal dark:text-white/90">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -97,7 +81,7 @@ export default function PresentationBis() {
                   </button>
                   <button
                     type="submit"
-                    className="relative inline-flex items-center justify-center gap-2 rounded-xl bg-royal hover:bg-royal-hover text-white font-title px-4 py-2 md:px-5 md:py-2.5 transition-colors"
+                    className="relative inline-flex items-center justify-center gap-2 rounded-xl bg-royal hover:bg-royal-hover text-white text-sm xs:text-base font-title px-2 py-1 xs:px-3 xs:py-2 transition-colors"
                     aria-label="Soumettre la recherche"
                   >
                     Rechercher
@@ -106,8 +90,8 @@ export default function PresentationBis() {
               </div>
             </form>
 
-            {/* Aide contextuelle */}
-            <div className="mt-3 flex flex-wrap items-center gap-2 text-xs md:text-sm text-slate-600 dark:text-slate-300">
+            {/* examples */}
+            <div className="mt-4 md:mt-5 flex flex-wrap items-center px-2 gap-2 text-xs md:text-sm text-slate-600 dark:text-slate-300">
               <span className="px-2 py-1 rounded-md bg-slate-200/60 dark:bg-white/10">
                 Ex: fonte
               </span>

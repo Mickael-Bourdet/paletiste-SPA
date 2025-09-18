@@ -10,8 +10,8 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-auto border-t font-body border-slate-300/40 dark:border-white/10 bg-white/60 dark:bg-slate-900 backdrop-blur-sm pb-20 mdl:pb-0">
-      <div className="wrapper py-10">
+    <footer className="wrapper mt-auto border-t font-body border-slate-300/40 dark:border-white/10 bg-white/60 dark:bg-slate-900 backdrop-blur-sm pb-20 mdl:pb-0">
+      <div className=" py-10">
         <div className="bodyWrapper grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-3">

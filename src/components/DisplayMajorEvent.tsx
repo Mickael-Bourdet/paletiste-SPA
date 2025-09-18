@@ -101,7 +101,7 @@ export default function DisplayMajorEvent() {
                   </p>
                 </div>
               </div>
-              <div className="mt-6 flex flex-col xxs:flex-row items-center justify-between gap-3">
+              <div className="mt-6 flex flex-col xxs:flex-row md:flex-col mdl:flex-row items-center justify-between gap-3">
                 <Link
                   to={`/events/${event.slug}`}
                   className="flex-1 group relative inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-300/60 dark:border-white/10 font-title md:text-lg bg-white/80 dark:bg-slate-800/40 backdrop-blur-sm shadow-sm hover:shadow-md dark:shadow-[#2c2f42] transition-all duration-300 hover:border-royal/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-royal/30"
