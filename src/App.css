@@ -18,12 +18,18 @@
   --color-delete: #d42511;
   --color-delete-hover: #b61f0f;
   --color-sideMenu: #ffffff;
+  --color-Fonte: #4d535d;
+  --color-Laiton: #d4af37;
+  --color-Bois: #beb0a7;
+  --color-Terre: #8b4513;
+  --color-Mixte: #9b59b6;
   --font-title: "Russo One", sans-serif;
   --font-subtitle: "Exo 2", sans-serif;
   --font-body: "Raleway", sans-serif;
   --breakpoint-xxs: 28.125rem; /* 450 px */
   --breakpoint-xs: 31.25rem; /* 500 px */
-  --breakpoint-mdl: 60.938rem; /* 950 px */
+  --breakpoint-mdl: 59.375rem; /* 950 px */
+  --breakpoint-xlg: 71.875rem; /* 1150 px */
 }
 
 .dark {
@@ -32,6 +38,16 @@
   --color-primary-hover: #e4c6c6;
   /* --color-sideMenu: #1a202c; */
   --color-sideMenu: #1f2937;
+}
+
+.wrapper {
+  @apply md:w-[90%] xlg:w-[85%] xlg:max-w-[1250px] mx-auto;
+}
+.bodyWrapper {
+  @apply gap-4 md:gap-6 w-full px-4 mdl:px-8 xlg:px-6 2xl:px-0;
+}
+.titleStyle {
+  @apply text-3xl mb-6 font-title text-center md:text-left px-4 mdl:px-8 xlg:px-6 2xl:px-0;
 }
 
 .underline-link {
@@ -43,50 +59,38 @@
                hover:after:scale-x-100 hover:after:origin-left;
 }
 
-/* The side navigation menu */
-.sidenav {
-  height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: #111; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+.badge {
+  @apply font-body text-xs text-body font-bold px-2 py-1 rounded-xl dark:text-primary;
 }
 
-/* The navigation menu links */
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+.badge-Laiton,
+.badge-Bois {
+  @apply text-primary dark:text-body;
+}
+.badge-Fonte {
+  @apply bg-Fonte;
+}
+.badge-Laiton {
+  @apply bg-Laiton;
+}
+.badge-Bois {
+  @apply bg-Bois;
+}
+.badge-Terre {
+  @apply bg-Terre;
+}
+.badge-Multi {
+  @apply bg-gradient-to-r from-[#3498DB] to-[#2C3E91];
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
+.button-primary {
+  @apply bg-primary text-body py-2 px-4 mx-auto block mb-2 mt-4 rounded-xl cursor-pointer hover:bg-primary-hover;
 }
 
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-  .sidenav a {
-    font-size: 18px;
-  }
+.mySwiper {
+  --swiper-pagination-color: var(--color-royal);
+  --swiper-pagination-bullet-inactive-color: #999999;
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-size: 10px;
+  --swiper-pagination-bullet-horizontal-gap: 8px;
 }

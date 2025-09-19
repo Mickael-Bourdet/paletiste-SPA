@@ -22,7 +22,7 @@ export default function SideMenu({ isOpen, onClose }: ISideMenuProps) {
         id="side-menu"
         role="menu"
         aria-hidden={!isOpen}
-        className={`fixed h-auto bottom-[70px] w-full xs:w-[50vw] right-0 bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
+        className={`fixed h-auto bottom-[68px] w-full xs:w-[50vw] right-0 bg-sideMenu shadow-lg transition-transform duration-300 font-subtitle z-20 ${
           isOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
