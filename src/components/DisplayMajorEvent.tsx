@@ -49,8 +49,8 @@ export default function DisplayMajorEvent() {
     <section className="py-8">
       <div className="wrapper">
         <h2 className="titleStyle">Prochain concours majeur</h2>
-        <div className="py-6 px-4 md:py-8 md:px-2">
-          <article className="bodyWrapper  relative grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch rounded-3xl border border-slate-300/40 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 backdrop-blur-md shadow-xl">
+        <div className="bodyWrapper">
+          <article className="relative grid grid-cols-1 sm:grid-cols-2 gap-6 items-stretch rounded-3xl border border-slate-300/40 dark:border-white/10 bg-white/70 dark:bg-slate-800/40 backdrop-blur-md shadow-xl">
             <div className="flex items-center justify-center relative pt-4 sm:pt-0  min-h-[220px] sm:min-h-[300px] md:min-h-[340px] lg:min-h-[520px]  ">
               <img
                 src={`${apiBaseUrl}${event.poster}`}
