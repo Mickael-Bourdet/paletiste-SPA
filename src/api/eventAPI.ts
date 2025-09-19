@@ -23,6 +23,40 @@ export async function getAllEvents(): Promise<IEvents> {
   return events;
 }
 
+export async function getUpcomingEvents(): Promise<IEvents> {
+  const response = await fetch(`${apiBaseUrl}/events/upcoming`);
+  if (!response.ok) {
+    throw new Error(
+      `Erreur lors de la récupération des concours: ${response.statusText}`
+    );
+  }
+
+  const events = await response.json();
+  return events;
+}
+export async function getMajorEvent(): Promise<IEvent> {
+  const response = await fetch(`${apiBaseUrl}/events/major`);
+  if (!response.ok) {
+    throw new Error(
+      `Erreur lors de la récupération des concours: ${response.statusText}`
+    );
+  }
+
+  const event = await response.json();
+  return event as IEvent;
+}
+export async function getLatestAddedEvents(): Promise<IEvents> {
+  const response = await fetch(`${apiBaseUrl}/events/latest`);
+  if (!response.ok) {
+    throw new Error(
+      `Erreur lors de la récupération des concours: ${response.statusText}`
+    );
+  }
+
+  const events = await response.json();
+  return events;
+}
+
 /**
  * @function getEventBySlug
  * @description Fetches a single event from the API using its slug.

@@ -41,7 +41,13 @@
 }
 
 .wrapper {
-  @apply md:w-[95%] xlg:w-[90%] xlg:max-w-[1350px] mx-auto;
+  @apply md:w-[90%] xlg:w-[85%] xlg:max-w-[1250px] mx-auto;
+}
+.bodyWrapper {
+  @apply gap-4 md:gap-6 w-full px-4 mdl:px-8 xlg:px-6 2xl:px-0;
+}
+.titleStyle {
+  @apply text-3xl mb-6 font-title text-center md:text-left px-4 mdl:px-8 xlg:px-6 2xl:px-0;
 }
 
 .underline-link {
@@ -73,7 +79,7 @@
 .badge-Terre {
   @apply bg-Terre;
 }
-.badge-Mixte {
+.badge-Multi {
   @apply bg-gradient-to-r from-[#3498DB] to-[#2C3E91];
 }
 
