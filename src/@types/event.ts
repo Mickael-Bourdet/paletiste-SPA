@@ -30,6 +30,7 @@ export type IEvents = IEvent[];
 export interface IReservation {
   type: string;
   value: string;
+  label?: string;
 }
 export interface ICategory {
   id: string;
