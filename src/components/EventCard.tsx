@@ -9,7 +9,7 @@ export default function EventCard({ event }: IEventCardProps) {
   return (
     <>
       <Link
-        to={event.slug}
+        to={`/concours/${event.slug}`}
         className="group block w-full max-w-70 mx-auto cursor-pointer"
       >
         <article

@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Error404 from "./pages/Error404";
 import { ErrorBoundary } from "react-error-boundary";
 import Error500 from "./pages/Error500";
+import EventDetails from "./pages/EventDetails";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUse from "./pages/TermsOfUse";
@@ -26,6 +27,7 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/concours/:slug" element={<EventDetails />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/confidentialite" element={<PrivacyPolicy />} />
           <Route path="/conditions" element={<TermsOfUse />} />

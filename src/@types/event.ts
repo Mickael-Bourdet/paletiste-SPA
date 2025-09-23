@@ -1,5 +1,5 @@
 export interface IEvent {
-  id: string;
+  id: number;
   eventType: string;
   title: string;
   organizer: string;
@@ -30,6 +30,7 @@ export type IEvents = IEvent[];
 export interface IReservation {
   type: string;
   value: string;
+  label?: string;
 }
 export interface ICategory {
   id: string;
