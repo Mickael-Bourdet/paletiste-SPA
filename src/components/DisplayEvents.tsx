@@ -15,12 +15,14 @@ interface IDisplayEventsProps {
   fetchEvents: () => Promise<IEvents>;
   hasButton: boolean;
   buttonLink?: string;
+  currentEventId?: number;
 }
 export default function DisplayEvents({
   title,
   fetchEvents,
   hasButton,
   buttonLink,
+  currentEventId,
 }: IDisplayEventsProps) {
   const [eventsList, setEventsList] = useState<IEvents>([]);
   const { handleError } = useErrorHandler();
@@ -29,13 +31,16 @@ export default function DisplayEvents({
     async function loadEvents() {
       try {
         const events = await fetchEvents();
-        setEventsList(events);
+        const filteredEvents = currentEventId
+          ? events.filter((event) => event.id !== currentEventId).slice(0, 4)
+          : events;
+        setEventsList(filteredEvents);
       } catch (error) {
         handleError(error);
       }
     }
     loadEvents();
-  }, [fetchEvents, handleError]);
+  }, [fetchEvents, handleError, currentEventId]);
   return (
     <>
       <section className="py-8">

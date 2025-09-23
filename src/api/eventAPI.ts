@@ -75,3 +75,14 @@ export async function getEventBySlug(slug: string): Promise<IEvent> {
   }
   return response.json();
 }
+
+export async function getEventsByCategory(category: string): Promise<IEvents> {
+  const response = await fetch(`${apiBaseUrl}/events?category=${category}`);
+  if (!response.ok) {
+    throw new Error(
+      `Erreur lors de la récupération des concours: ${response.statusText}`
+    );
+  }
+  const events = await response.json();
+  return events;
+}

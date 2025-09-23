@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { IEvent } from "../@types/event";
-import { getEventBySlug, getUpcomingEvents } from "../api/eventAPI";
+import { getEventBySlug, getEventsByCategory } from "../api/eventAPI";
 import { useErrorHandler } from "../utils/useErrorHandler";
 import DisplayEvents from "../components/DisplayEvents";
 
@@ -165,9 +165,10 @@ export default function EventDetails() {
       </section>
       <DisplayEvents
         title="Concours qui peuvent vous intéressés"
-        fetchEvents={getUpcomingEvents}
+        fetchEvents={() => getEventsByCategory(event.category.name)}
         hasButton={true}
         buttonLink="/events"
+        currentEventId={event.id}
       />
     </>
   );
