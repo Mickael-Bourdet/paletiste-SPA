@@ -9,10 +9,10 @@ const PAGE_SIZE = 20;
 type Filters = {
   date: string; // ISO (yyyy-mm-dd)
   month: number | null; // 0-11
-  department: string; // 85, 44, etc.
-  paletType: string; // Fonte, Laiton, Bois, Terre
-  teamType: string; // individuel, doublette, triplette
-  organizerType: string; // club, association, federation, autres
+  department: string[]; // multi
+  paletType: string[]; // multi (Fonte, Laiton, Bois, Terre)
+  teamType: string[]; // multi
+  organizerType: string[]; // multi (club, association, federation, autres)
 };
 
 export default function AllEvents() {
@@ -23,14 +23,18 @@ export default function AllEvents() {
   const [filters, setFilters] = useState<Filters>({
     date: "",
     month: null,
-    department: "",
-    paletType: "",
-    teamType: "",
-    organizerType: "",
+    department: [],
+    paletType: [],
+    teamType: [],
+    organizerType: [],
   });
-
   const [open, setOpen] = useState(false);
-
+  const [displayMonth, setDisplayMonth] = useState<number>(
+    new Date().getMonth()
+  );
+  const [displayYear, setDisplayYear] = useState<number>(
+    new Date().getFullYear()
+  );
   const months = [
     "Janvier",
     "Février",
@@ -115,27 +119,40 @@ export default function AllEvents() {
         if (!sameMonth) return false;
       }
 
-      if (filters.department) {
+      if (filters.department.length > 0) {
         const dep = e.postalCode?.substring(0, 2) ?? "";
-        if (dep !== filters.department) return false;
+        if (!filters.department.includes(dep)) return false;
       }
 
-      if (filters.paletType) {
-        if (normalize(e.category?.name) !== normalize(filters.paletType))
-          return false;
+      if (filters.paletType.length > 0) {
+        const cat = normalize(e.category?.name);
+        const anyMatch = filters.paletType
+          .map((x) => normalize(x))
+          .includes(cat);
+        if (!anyMatch) return false;
       }
 
-      if (filters.teamType) {
-        // teamType peut être nombre côté types, on le compare en string normalisée
-        if (normalize(e.teamType) !== normalize(filters.teamType)) return false;
+      if (filters.teamType.length > 0) {
+        const teamStr = normalize(
+          typeof e.teamType === "string" ? e.teamType : String(e.teamType)
+        );
+        const anyMatch = filters.teamType
+          .map((t) => normalize(t))
+          .includes(teamStr);
+        if (!anyMatch) return false;
       }
 
-      if (filters.organizerType) {
-        const org = normalize(e.organizerType);
-        const wanted = normalize(filters.organizerType);
-        if (wanted === "autres") {
-          if (["club", "association", "federation"].includes(org)) return false;
-        } else if (org !== wanted) return false;
+      if (filters.organizerType.length > 0) {
+        const org = normalize(String((e as unknown as IEvent).organizerType));
+        const selected = filters.organizerType.map((o) => normalize(o));
+        const standard = ["club", "association", "federation"];
+        const includeOthers = selected.includes("autres");
+        const includeStandards = selected.filter((s) => s !== "autres");
+        let match = false;
+        if (includeStandards.length > 0 && includeStandards.includes(org))
+          match = true;
+        if (includeOthers && !standard.includes(org)) match = true;
+        if (!match) return false;
       }
 
       return true;
@@ -155,23 +172,58 @@ export default function AllEvents() {
     setFilters((prev) => ({ ...prev, [key]: value }));
   }
 
+  function updateMultiFilter(
+    key: "department" | "paletType" | "teamType" | "organizerType",
+    values: string[]
+  ) {
+    setPage(1);
+    setFilters((prev) => ({ ...prev, [key]: values }));
+  }
+
   function clearFilters() {
     setFilters({
       date: "",
       month: null,
-      department: "",
-      paletType: "",
-      teamType: "",
-      organizerType: "",
+      department: [],
+      paletType: [],
+      teamType: [],
+      organizerType: [],
     });
     setPage(1);
   }
+
+  function prevMonth() {
+    setDisplayMonth((m) => (m === 0 ? 11 : m - 1));
+    setDisplayYear((y, i = displayMonth) => (i === 0 ? y - 1 : y));
+  }
+  function nextMonth() {
+    setDisplayMonth((m) => (m === 11 ? 0 : m + 1));
+    setDisplayYear((y, i = displayMonth) => (i === 11 ? y + 1 : y));
+  }
+
+  const monthDays = useMemo(() => {
+    const firstDay = new Date(displayYear, displayMonth, 1);
+    const startWeekday = (firstDay.getDay() + 6) % 7; // 0=Mon
+    const daysInMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
+    const days = [] as { date: Date; past: boolean }[];
+    const today = new Date();
+    // Fill leading blanks
+    for (let i = 0; i < startWeekday; i++)
+      days.push({ date: new Date(NaN), past: true });
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dt = new Date(displayYear, displayMonth, d);
+      const past =
+        dt < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      days.push({ date: dt, past });
+    }
+    return days;
+  }, [displayMonth, displayYear]);
 
   if (loading) return <div className="wrapper p-6 md:p-10">Chargement...</div>;
 
   return (
     <section className="wrapper py-8 md:py-12">
-      {/* Titre + Filtres */}
+      {/* Title + Filters */}
       <header className="mb-6 md:mb-8">
         <h1 className="titleStyle text-3xl md:text-4xl font-title leading-tight">
           Tous les concours
@@ -179,76 +231,115 @@ export default function AllEvents() {
         <div className="bodyWrapper mt-4 grid grid-cols-1 sm:grid-cols-2 mdl:grid-cols-3 xlg:grid-cols-5 gap-3 md:gap-4 items-end">
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
-              Date ou mois
+              Date
             </label>
             <div className="relative inline-block">
-              {/* Bouton pour ouvrir la modal */}
               <button
                 type="button"
                 onClick={() => setOpen(!open)}
                 className="px-3 py-2 rounded-xl border bg-white/70 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
               >
                 {filters.date
-                  ? filters.date
+                  ? new Date(filters.date).toLocaleDateString("fr-FR", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
                   : filters.month !== null
                   ? months[filters.month]
-                  : "Sélectionner une date ou un mois"}
+                  : "Sélectionner une date"}
               </button>
 
-              {/* Popover flottant */}
               {open && (
-                <div className="absolute z-50 w-64 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-slate-200 dark:border-white/20">
-                  {/* Sélection date */}
-                  <div className="mb-4">
-                    <label className="block text-sm mb-1">Date précise :</label>
-                    <input
-                      type="date"
-                      value={filters.date || ""}
-                      onChange={(e) => {
-                        updateFilter("date", e.target.value);
-                        setOpen(false); // fermer popover après sélection
-                      }}
-                      className="rounded-xl border border-slate-300 dark:border-white/10 bg-white/70 dark:bg-slate-900/30 px-3 py-2 w-full"
-                    />
+                <div className="absolute left-0 mt-2 z-50 w-[320px] p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20">
+                  {/* Navigation mois */}
+                  <div className="flex items-center justify-between mb-3">
+                    <button
+                      onClick={prevMonth}
+                      className="px-2 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10"
+                    >
+                      <i className="fa-solid fa-chevron-left" />
+                    </button>
+                    <div className="font-subtitle">
+                      {months[displayMonth]} {displayYear}
+                    </div>
+                    <button
+                      onClick={nextMonth}
+                      className="px-2 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-white/10"
+                    >
+                      <i className="fa-solid fa-chevron-right" />
+                    </button>
                   </div>
 
-                  {/* Sélection mois */}
-                  <div>
-                    <label className="block text-sm mb-1">Mois :</label>
-                    <div className="flex flex-wrap gap-1.5">
-                      {months.map((m, idx) => (
+                  {/* Calendrier */}
+                  <div className="grid grid-cols-7 gap-1 text-center text-xs mb-2">
+                    {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"].map(
+                      (d) => (
+                        <div
+                          key={d}
+                          className="text-slate-500 dark:text-slate-400"
+                        >
+                          {d}
+                        </div>
+                      )
+                    )}
+                  </div>
+                  <div className="grid grid-cols-7 gap-1 mb-3">
+                    {monthDays.map((cell, idx) =>
+                      isNaN(cell.date.getTime()) ? (
+                        <div key={idx} />
+                      ) : (
                         <button
-                          key={m}
+                          key={idx}
                           type="button"
+                          disabled={cell.past}
                           onClick={() => {
-                            updateFilter("month", idx);
+                            const yyyy = cell.date.getFullYear();
+                            const mm = String(
+                              cell.date.getMonth() + 1
+                            ).padStart(2, "0");
+                            const dd = String(cell.date.getDate()).padStart(
+                              2,
+                              "0"
+                            );
+                            updateFilter("date", `${yyyy}-${mm}-${dd}`);
                             setOpen(false);
                           }}
-                          className={`px-2.5 py-1.5 rounded-lg border text-sm ${
-                            filters.month === idx
-                              ? "bg-royal text-white border-royal"
-                              : "border-slate-300 dark:border-white/10 hover:bg-slate-200/60 dark:hover:bg-white/10"
+                          className={`h-8 w-8 rounded-lg mx-auto text-sm ${
+                            cell.past
+                              ? "opacity-40 cursor-not-allowed"
+                              : "hover:bg-slate-100 dark:hover:bg-white/10"
                           }`}
-                          aria-pressed={filters.month === idx}
                         >
-                          {m}
+                          {cell.date.getDate()}
                         </button>
-                      ))}
-                      {filters.month !== null && (
-                        <button
-                          type="button"
-                          onClick={() => updateFilter("month", null)}
-                          className="ml-2 px-2.5 py-1.5 rounded-lg border text-sm border-slate-300 dark:border-white/10 hover:bg-slate-200/60 dark:hover:bg-white/10"
-                        >
-                          Effacer mois
-                        </button>
-                      )}
-                    </div>
+                      )
+                    )}
+                  </div>
+
+                  {/* Sélecteur mois en boutons */}
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {months.map((m, idx) => (
+                      <button
+                        key={m}
+                        type="button"
+                        onClick={() => {
+                          updateFilter("month", idx);
+                          setOpen(false);
+                        }}
+                        className={`px-2.5 py-1.5 rounded-lg border text-xs ${
+                          filters.month === idx
+                            ? "bg-royal text-white border-royal"
+                            : "border-slate-300 dark:border-white/10 hover:bg-slate-200/60 dark:hover:bg-white/10"
+                        }`}
+                      >
+                        {m}
+                      </button>
+                    ))}
                   </div>
                 </div>
               )}
 
-              {/* Backdrop pour fermer au clic en dehors */}
               {open && (
                 <div
                   className="fixed inset-0 z-40"
@@ -257,73 +348,243 @@ export default function AllEvents() {
               )}
             </div>
           </div>
+
+          {/* Chips filtres actifs */}
+
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Département
             </label>
-            <select
-              value={filters.department}
-              onChange={(e) => updateFilter("department", e.target.value)}
-              className="rounded-xl border border-slate-300 dark:border-white/10 bg-white/70 dark:bg-slate-900/30 px-3 py-2"
-            >
-              <option value="">Tous</option>
-              {departmentOptions.map((d) => (
-                <option key={d} value={d}>
-                  {d}
-                </option>
-              ))}
-            </select>
+            <div className="grid grid-cols-3 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30 max-h-40 overflow-auto">
+              {departmentOptions.map((d) => {
+                const id = `dep-${d}`;
+                const checked = filters.department.includes(d);
+                return (
+                  <label
+                    key={d}
+                    htmlFor={id}
+                    className="inline-flex items-center gap-2 text-sm"
+                  >
+                    <input
+                      id={id}
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => {
+                        const next = e.target.checked
+                          ? [...filters.department, d]
+                          : filters.department.filter((x) => x !== d);
+                        updateMultiFilter("department", next);
+                      }}
+                      className="h-4 w-4 accent-royal"
+                    />
+                    <span>{d}</span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Type de palet
             </label>
-            <select
-              value={filters.paletType}
-              onChange={(e) => updateFilter("paletType", e.target.value)}
-              className="rounded-xl border border-slate-300 dark:border-white/10 bg-white/70 dark:bg-slate-900/30 px-3 py-2"
-            >
-              <option value="">Tous</option>
-              {paletOptions.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
+            <div className="grid grid-cols-2 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30">
+              {paletOptions.map((c) => {
+                const id = `palet-${c}`;
+                const checked = filters.paletType.includes(c);
+                return (
+                  <label
+                    key={c}
+                    htmlFor={id}
+                    className="inline-flex items-center gap-2 text-sm"
+                  >
+                    <input
+                      id={id}
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => {
+                        const next = e.target.checked
+                          ? [...filters.paletType, c]
+                          : filters.paletType.filter((x) => x !== c);
+                        updateMultiFilter("paletType", next);
+                      }}
+                      className="h-4 w-4 accent-royal"
+                    />
+                    <span>{c}</span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Type d'équipe
             </label>
-            <select
-              value={filters.teamType}
-              onChange={(e) => updateFilter("teamType", e.target.value)}
-              className="rounded-xl border border-slate-300 dark:border-white/10 bg-white/70 dark:bg-slate-900/30 px-3 py-2"
-            >
-              <option value="">Tous</option>
-              {teamTypeOptions.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
+            <div className="grid grid-cols-2 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30">
+              {teamTypeOptions.map((t) => {
+                const id = `team-${t}`;
+                const checked = filters.teamType.includes(t);
+                return (
+                  <label
+                    key={t}
+                    htmlFor={id}
+                    className="inline-flex items-center gap-2 text-sm"
+                  >
+                    <input
+                      id={id}
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => {
+                        const next = e.target.checked
+                          ? [...filters.teamType, t]
+                          : filters.teamType.filter((x) => x !== t);
+                        updateMultiFilter("teamType", next);
+                      }}
+                      className="h-4 w-4 accent-royal"
+                    />
+                    <span>{t}</span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Organisateur
             </label>
-            <select
-              value={filters.organizerType}
-              onChange={(e) => updateFilter("organizerType", e.target.value)}
-              className="rounded-xl border border-slate-300 dark:border-white/10 bg-white/70 dark:bg-slate-900/30 px-3 py-2"
-            >
-              <option value="">Tous</option>
-              {organizerTypeOptions.map((o) => (
-                <option key={o} value={o}>
-                  {o}
-                </option>
+            <div className="grid grid-cols-2 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30">
+              {organizerTypeOptions.map((o) => {
+                const id = `org-${o}`;
+                const checked = filters.organizerType.includes(o);
+                return (
+                  <label
+                    key={o}
+                    htmlFor={id}
+                    className="inline-flex items-center gap-2 text-sm"
+                  >
+                    <input
+                      id={id}
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => {
+                        const next = e.target.checked
+                          ? [...filters.organizerType, o]
+                          : filters.organizerType.filter((x) => x !== o);
+                        updateMultiFilter("organizerType", next);
+                      }}
+                      className="h-4 w-4 accent-royal"
+                    />
+                    <span>{o}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+          <div className="sm:col-span-2 mdl:col-span-3 xlg:col-span-5">
+            <div className="flex flex-wrap gap-2 mt-2">
+              {filters.date && (
+                <span className="px-2 py-1 rounded-lg bg-slate-200/60 dark:bg-white/10 text-sm inline-flex items-center gap-2">
+                  Date :{" "}
+                  {new Date(filters.date).toLocaleDateString("fr-FR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                  <button
+                    onClick={() => updateFilter("date", "")}
+                    aria-label="Supprimer filtre date"
+                  >
+                    <i className="fa-solid fa-xmark" />
+                  </button>
+                </span>
+              )}
+              {filters.month !== null && (
+                <span className="px-2 py-1 rounded-lg bg-slate-200/60 dark:bg-white/10 text-sm inline-flex items-center gap-2">
+                  Mois: {months[filters.month]}
+                  <button
+                    onClick={() => updateFilter("month", null)}
+                    aria-label="Supprimer filtre mois"
+                  >
+                    <i className="fa-solid fa-xmark" />
+                  </button>
+                </span>
+              )}
+              {filters.department.map((d) => (
+                <span
+                  key={d}
+                  className="px-2 py-1 rounded-lg bg-slate-200/60 dark:bg-white/10 text-sm inline-flex items-center gap-2"
+                >
+                  Dep: {d}
+                  <button
+                    onClick={() =>
+                      updateFilter(
+                        "department",
+                        filters.department.filter((x) => x !== d)
+                      )
+                    }
+                    aria-label={`Supprimer département ${d}`}
+                  >
+                    <i className="fa-solid fa-xmark" />
+                  </button>
+                </span>
               ))}
-            </select>
+              {filters.paletType.map((p) => (
+                <span
+                  key={p}
+                  className="px-2 py-1 rounded-lg bg-slate-200/60 dark:bg-white/10 text-sm inline-flex items-center gap-2"
+                >
+                  Palet: {p}
+                  <button
+                    onClick={() =>
+                      updateFilter(
+                        "paletType",
+                        filters.paletType.filter((x) => x !== p)
+                      )
+                    }
+                    aria-label={`Supprimer type ${p}`}
+                  >
+                    <i className="fa-solid fa-xmark" />
+                  </button>
+                </span>
+              ))}
+              {filters.teamType.map((t) => (
+                <span
+                  key={t}
+                  className="px-2 py-1 rounded-lg bg-slate-200/60 dark:bg-white/10 text-sm inline-flex items-center gap-2"
+                >
+                  Équipe: {t}
+                  <button
+                    onClick={() =>
+                      updateFilter(
+                        "teamType",
+                        filters.teamType.filter((x) => x !== t)
+                      )
+                    }
+                    aria-label={`Supprimer équipe ${t}`}
+                  >
+                    <i className="fa-solid fa-xmark" />
+                  </button>
+                </span>
+              ))}
+              {filters.organizerType.map((o) => (
+                <span
+                  key={o}
+                  className="px-2 py-1 rounded-lg bg-slate-200/60 dark:bg-white/10 text-sm inline-flex items-center gap-2"
+                >
+                  Organisateur: {o}
+                  <button
+                    onClick={() =>
+                      updateFilter(
+                        "organizerType",
+                        filters.organizerType.filter((x) => x !== o)
+                      )
+                    }
+                    aria-label={`Supprimer organisateur ${o}`}
+                  >
+                    <i className="fa-solid fa-xmark" />
+                  </button>
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex gap-2 sm:col-span-2 mdl:col-span-3 xlg:col-span-5 mt-1">
             <button
