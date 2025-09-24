@@ -4,6 +4,7 @@ import MobileNav from "./components/layout/MobileNav";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
+import AllEvents from "./pages/AllEvents";
 import { Route, Routes } from "react-router-dom";
 import Error404 from "./pages/Error404";
 import { ErrorBoundary } from "react-error-boundary";
@@ -27,6 +28,7 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/concours" element={<AllEvents />} />
           <Route path="/concours/:slug" element={<EventDetails />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/confidentialite" element={<PrivacyPolicy />} />
