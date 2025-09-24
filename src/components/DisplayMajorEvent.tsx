@@ -7,6 +7,9 @@ export default function DisplayMajorEvent() {
   const [event, setEvent] = useState<IEvent | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const apiBaseUrl = import.meta.env.VITE_API_URL;
+  const urlReservation = event?.reservation?.find(
+    (item) => item.type === "url"
+  );
 
   useEffect(() => {
     async function load() {
@@ -115,7 +118,13 @@ export default function DisplayMajorEvent() {
                   </span>
                 </Link>
                 <Link
-                  to={`/events/${event.slug}/register`}
+                  to={
+                    urlReservation
+                      ? urlReservation.value
+                      : "https://www.le-palet.com"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 bg-royal hover:bg-royal-hover text-white font-title md:text-lg px-5 py-3 rounded-xl shadow-md transition-colors duration-200 text-center"
                 >
                   S'inscrire
