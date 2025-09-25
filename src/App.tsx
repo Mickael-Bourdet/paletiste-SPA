@@ -18,7 +18,7 @@ import LegalNotice from "./pages/LegalNotice";
 function App() {
   return (
     // Wrapper for the entire app
-    <div className="bg-body min-h-screen text-primary flex flex-col">
+    <div className="bg-body min-h-screen text-primary flex flex-col font-body">
       <BackToTopPage />
       <Header />
 

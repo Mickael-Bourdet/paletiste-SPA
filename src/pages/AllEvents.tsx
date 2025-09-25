@@ -28,7 +28,7 @@ export default function AllEvents() {
     teamType: [],
     organizerType: [],
   });
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<string | null>(null);
   const [displayMonth, setDisplayMonth] = useState<number>(
     new Date().getMonth()
   );
@@ -230,27 +230,21 @@ export default function AllEvents() {
         </h1>
         <div className="bodyWrapper mt-4 grid grid-cols-1 sm:grid-cols-2 mdl:grid-cols-3 xlg:grid-cols-5 gap-3 md:gap-4 items-end">
           <div className="flex flex-col gap-1">
+            {/* Date */}
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Date
             </label>
             <div className="relative inline-block">
               <button
                 type="button"
-                onClick={() => setOpen(!open)}
+                onClick={() => setOpen(open === "date" ? null : "date")}
                 className="px-3 py-2 rounded-xl border bg-white/70 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
               >
-                {filters.date
-                  ? new Date(filters.date).toLocaleDateString("fr-FR", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })
-                  : filters.month !== null
-                  ? months[filters.month]
-                  : "Sélectionner une date"}
+                Sélectionner une date
               </button>
 
-              {open && (
+              {/* Date Modal */}
+              {open === "date" && (
                 <div className="absolute left-0 mt-2 z-50 w-[320px] p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20">
                   {/* Navigation mois */}
                   <div className="flex items-center justify-between mb-3">
@@ -271,7 +265,7 @@ export default function AllEvents() {
                     </button>
                   </div>
 
-                  {/* Calendrier */}
+                  {/* Calendar */}
                   <div className="grid grid-cols-7 gap-1 text-center text-xs mb-2">
                     {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"].map(
                       (d) => (
@@ -303,7 +297,7 @@ export default function AllEvents() {
                               "0"
                             );
                             updateFilter("date", `${yyyy}-${mm}-${dd}`);
-                            setOpen(false);
+                            setOpen(null);
                           }}
                           className={`h-8 w-8 rounded-lg mx-auto text-sm ${
                             cell.past
@@ -317,7 +311,7 @@ export default function AllEvents() {
                     )}
                   </div>
 
-                  {/* Sélecteur mois en boutons */}
+                  {/* Month selector with buttons */}
                   <div className="grid grid-cols-3 gap-1.5">
                     {months.map((m, idx) => (
                       <button
@@ -325,7 +319,7 @@ export default function AllEvents() {
                         type="button"
                         onClick={() => {
                           updateFilter("month", idx);
-                          setOpen(false);
+                          setOpen(null);
                         }}
                         className={`px-2.5 py-1.5 rounded-lg border text-xs ${
                           filters.month === idx
@@ -343,46 +337,63 @@ export default function AllEvents() {
               {open && (
                 <div
                   className="fixed inset-0 z-40"
-                  onClick={() => setOpen(false)}
+                  onClick={() => setOpen(null)}
                 />
               )}
             </div>
           </div>
 
-          {/* Chips filtres actifs */}
-
+          {/* Department */}
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Département
             </label>
-            <div className="grid grid-cols-3 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30 max-h-40 overflow-auto">
-              {departmentOptions.map((d) => {
-                const id = `dep-${d}`;
-                const checked = filters.department.includes(d);
-                return (
-                  <label
-                    key={d}
-                    htmlFor={id}
-                    className="inline-flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      id={id}
-                      type="checkbox"
-                      checked={checked}
-                      onChange={(e) => {
-                        const next = e.target.checked
-                          ? [...filters.department, d]
-                          : filters.department.filter((x) => x !== d);
-                        updateMultiFilter("department", next);
-                      }}
-                      className="h-4 w-4 accent-royal"
-                    />
-                    <span>{d}</span>
-                  </label>
-                );
-              })}
+
+            <div className="relative inline-block">
+              <button
+                type="button"
+                onClick={() =>
+                  setOpen(open === "department" ? null : "department")
+                }
+                className="px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+              >
+                Choisir un département
+              </button>
+
+              {open === "department" && (
+                <div className="absolute left-0 mt-2 z-50 w-[180px] p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20">
+                  <div className="grid grid-cols-3 gap-1 text-center">
+                    {departmentOptions.map((d) => {
+                      return (
+                        <label
+                          key={d}
+                          className="flex items-center gap-1 px-3 py-2 justify-center"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={filters.department.includes(d)}
+                            onChange={() => {
+                              const next = filters.department.includes(d)
+                                ? filters.department.filter((x) => x !== d)
+                                : [...filters.department, d];
+                              setFilters({ ...filters, department: next });
+                            }}
+                            className="h-5 w-5 accent-royal"
+                            style={{
+                              minWidth: "1rem",
+                              minHeight: "1rem",
+                            }}
+                          />
+                          <span>{d}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
+
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Type de palet
@@ -415,6 +426,7 @@ export default function AllEvents() {
               })}
             </div>
           </div>
+
           <div className="flex flex-col gap-1">
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Type d'équipe
