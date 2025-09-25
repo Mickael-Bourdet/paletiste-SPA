@@ -3,6 +3,7 @@ import type { IEvent } from "../@types/event";
 import { getAllEvents } from "../api/eventAPI";
 import EventCard from "../components/EventCard";
 import { useErrorHandler } from "../utils/useErrorHandler";
+import DepartmentFilter from "../components/modals/DepartmentFilter";
 
 const PAGE_SIZE = 20;
 
@@ -361,35 +362,13 @@ export default function AllEvents() {
               </button>
 
               {open === "department" && (
-                <div className="absolute left-0 mt-2 z-50 w-[180px] p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20">
-                  <div className="grid grid-cols-3 gap-1 text-center">
-                    {departmentOptions.map((d) => {
-                      return (
-                        <label
-                          key={d}
-                          className="flex items-center gap-1 px-3 py-2 justify-center"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={filters.department.includes(d)}
-                            onChange={() => {
-                              const next = filters.department.includes(d)
-                                ? filters.department.filter((x) => x !== d)
-                                : [...filters.department, d];
-                              setFilters({ ...filters, department: next });
-                            }}
-                            className="h-5 w-5 accent-royal"
-                            style={{
-                              minWidth: "1rem",
-                              minHeight: "1rem",
-                            }}
-                          />
-                          <span>{d}</span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                </div>
+                <DepartmentFilter
+                  options={departmentOptions}
+                  selected={filters.department}
+                  onChange={(next) =>
+                    setFilters({ ...filters, department: next })
+                  }
+                />
               )}
             </div>
           </div>
