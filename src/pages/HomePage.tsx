@@ -13,7 +13,7 @@ export default function HomePage() {
         title="Concours à venir"
         fetchEvents={getUpcomingEvents}
         hasButton={true}
-        buttonLink="/events"
+        buttonLink="/concours"
       />
       <DisplayMajorEvent />
       <DisplayCategories />
@@ -22,7 +22,7 @@ export default function HomePage() {
         title="Derniers concours enregistrés"
         fetchEvents={getLatestAddedEvents}
         hasButton={true}
-        buttonLink="/events"
+        buttonLink="/concours"
       />
     </>
   );

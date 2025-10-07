@@ -167,7 +167,7 @@ export default function EventDetails() {
         title="Concours qui peuvent vous intéressés"
         fetchEvents={() => getEventsByCategory(event.category.name)}
         hasButton={true}
-        buttonLink="/events"
+        buttonLink="/concours"
         currentEventId={event.id}
       />
     </>
