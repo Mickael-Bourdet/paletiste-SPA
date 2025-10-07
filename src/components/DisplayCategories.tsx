@@ -51,7 +51,7 @@ export default function DisplayCategories() {
               className="basis-[90%] md:basis-[48%] lg:basis-[31%]  xl:[flex-basis:18%]"
             >
               <Link
-                to={`/events?category=${category.slug}`}
+                to={`/concours?category=${category.name}`}
                 className={cardClassName}
               >
                 <img

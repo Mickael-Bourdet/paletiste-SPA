@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import type { IEvent } from "../@types/event";
 import { getAllEvents } from "../api/eventAPI";
 import EventCard from "../components/EventCard";
@@ -16,19 +17,27 @@ type Filters = {
   organizerType: string[]; // multi (club, association, federation, autres)
 };
 
+function getInitialFilters(useSearchParams: URLSearchParams): Filters {
+  const category = useSearchParams.get("category");
+  return {
+    date: "",
+    month: null,
+    department: [],
+    paletType: category ? [category] : [],
+    teamType: [],
+    organizerType: [],
+  };
+}
+
 export default function AllEvents() {
+  const [searchParams] = useSearchParams();
   const { handleError } = useErrorHandler();
   const [events, setEvents] = useState<IEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [filters, setFilters] = useState<Filters>({
-    date: "",
-    month: null,
-    department: [],
-    paletType: [],
-    teamType: [],
-    organizerType: [],
-  });
+  const [filters, setFilters] = useState<Filters>(() =>
+    getInitialFilters(searchParams)
+  );
   const [open, setOpen] = useState<string | null>(null);
   const [displayMonth, setDisplayMonth] = useState<number>(
     new Date().getMonth()
@@ -239,7 +248,7 @@ export default function AllEvents() {
               <button
                 type="button"
                 onClick={() => setOpen(open === "date" ? null : "date")}
-                className="px-3 py-2 rounded-xl border bg-white/70 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
               >
                 Sélectionner une date
               </button>
@@ -356,7 +365,7 @@ export default function AllEvents() {
                 onClick={() =>
                   setOpen(open === "department" ? null : "department")
                 }
-                className="px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
               >
                 Choisir un département
               </button>
