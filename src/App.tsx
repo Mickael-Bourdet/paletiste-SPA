@@ -5,7 +5,7 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import HomePage from "./pages/HomePage";
 import AllEvents from "./pages/AllEvents";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Error404 from "./pages/Error404";
 import { ErrorBoundary } from "react-error-boundary";
 import Error500 from "./pages/Error500";
@@ -16,6 +16,8 @@ import TermsOfUse from "./pages/TermsOfUse";
 import LegalNotice from "./pages/LegalNotice";
 
 function App() {
+  const location = useLocation();
+
   return (
     // Wrapper for the entire app
     <div className="bg-body min-h-screen text-primary flex flex-col font-body">

@@ -17,20 +17,49 @@ type Filters = {
   organizerType: string[]; // multi (club, association, federation, autres)
 };
 
-function getInitialFilters(useSearchParams: URLSearchParams): Filters {
-  const category = useSearchParams.get("category");
+const months = [
+  "Janvier",
+  "Février",
+  "Mars",
+  "Avril",
+  "Mai",
+  "Juin",
+  "Juillet",
+  "Août",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
+];
+
+function getInitialFilters(searchParams: URLSearchParams): Filters {
+  const category = searchParams.get("category");
+  const date = searchParams.get("date") || "";
+  const month = searchParams.get("month");
+  const department =
+    searchParams.get("department")?.split(",").filter(Boolean) || [];
+  const teamType =
+    searchParams.get("teamType")?.split(",").filter(Boolean) || [];
+  const organizerType =
+    searchParams.get("organizerType")?.split(",").filter(Boolean) || [];
+
+  // Convertir le nom du mois en index
+  const monthIndex = month
+    ? months.findIndex((m) => m.toLowerCase() === month.toLowerCase())
+    : null;
+
   return {
-    date: "",
-    month: null,
-    department: [],
+    date,
+    month: monthIndex !== -1 ? monthIndex : null,
+    department,
     paletType: category ? [category] : [],
-    teamType: [],
-    organizerType: [],
+    teamType,
+    organizerType,
   };
 }
 
 export default function AllEvents() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { handleError } = useErrorHandler();
   const [events, setEvents] = useState<IEvent[]>([]);
   const [loading, setLoading] = useState(true);
@@ -45,25 +74,12 @@ export default function AllEvents() {
   const [displayYear, setDisplayYear] = useState<number>(
     new Date().getFullYear()
   );
-  const months = [
-    "Janvier",
-    "Février",
-    "Mars",
-    "Avril",
-    "Mai",
-    "Juin",
-    "Juillet",
-    "Août",
-    "Septembre",
-    "Octobre",
-    "Novembre",
-    "Décembre",
-  ];
 
   useEffect(() => {
     async function load() {
+      setLoading(true);
       try {
-        const data = await getAllEvents();
+        const data = await getAllEvents(searchParams);
         setEvents(data);
       } catch (e) {
         handleError(e);
@@ -72,7 +88,7 @@ export default function AllEvents() {
       }
     }
     load();
-  }, [handleError]);
+  }, [handleError, searchParams]);
 
   // Options dynamiques issues des données
   const departmentOptions = useMemo(() => {
@@ -83,111 +99,72 @@ export default function AllEvents() {
     return Array.from(set).sort((a, b) => a.localeCompare(b));
   }, [events]);
 
-  const paletOptions = useMemo(() => {
-    const set = new Set<string>();
-    events.forEach((e) => {
-      if (e.category?.name) set.add(e.category.name);
-    });
-    return Array.from(set).sort((a, b) => a.localeCompare(b));
-  }, [events]);
+  // Liste fixe des catégories de palets disponibles
+  const paletOptions = ["Fonte", "Laiton", "Bois", "Terre", "Multi"];
 
   const teamTypeOptions = ["Individuel", "Doublette", "Triplette"];
   const organizerTypeOptions = ["Club", "Association", "Fédération", "Autres"];
 
-  // Filtrage
-  const filteredEvents = useMemo(() => {
-    const selectedDate = filters.date ? new Date(filters.date) : null;
-
-    const normalize = (s: unknown) =>
-      typeof s === "string"
-        ? s
-            .toLowerCase()
-            .trim()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-        : String(s ?? "")
-            .toLowerCase()
-            .trim();
-
-    return events.filter((e) => {
-      if (selectedDate) {
-        const d = new Date(e.date);
-        const sameDay =
-          d.getFullYear() === selectedDate.getFullYear() &&
-          d.getMonth() === selectedDate.getMonth() &&
-          d.getDate() === selectedDate.getDate();
-        if (!sameDay) return false;
-      } else if (filters.month !== null) {
-        const now = new Date();
-        const targetYear =
-          filters.month < now.getMonth()
-            ? now.getFullYear() + 1
-            : now.getFullYear();
-        const d = new Date(e.date);
-        const sameMonth =
-          d.getFullYear() === targetYear && d.getMonth() === filters.month;
-        if (!sameMonth) return false;
-      }
-
-      if (filters.department.length > 0) {
-        const dep = e.postalCode?.substring(0, 2) ?? "";
-        if (!filters.department.includes(dep)) return false;
-      }
-
-      if (filters.paletType.length > 0) {
-        const cat = normalize(e.category?.name);
-        const anyMatch = filters.paletType
-          .map((x) => normalize(x))
-          .includes(cat);
-        if (!anyMatch) return false;
-      }
-
-      if (filters.teamType.length > 0) {
-        const teamStr = normalize(
-          typeof e.teamType === "string" ? e.teamType : String(e.teamType)
-        );
-        const anyMatch = filters.teamType
-          .map((t) => normalize(t))
-          .includes(teamStr);
-        if (!anyMatch) return false;
-      }
-
-      if (filters.organizerType.length > 0) {
-        const org = normalize(String((e as unknown as IEvent).organizerType));
-        const selected = filters.organizerType.map((o) => normalize(o));
-        const standard = ["club", "association", "federation"];
-        const includeOthers = selected.includes("autres");
-        const includeStandards = selected.filter((s) => s !== "autres");
-        let match = false;
-        if (includeStandards.length > 0 && includeStandards.includes(org))
-          match = true;
-        if (includeOthers && !standard.includes(org)) match = true;
-        if (!match) return false;
-      }
-
-      return true;
-    });
-  }, [events, filters]);
-
   // Pagination
-  const totalPages = Math.max(1, Math.ceil(filteredEvents.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(events.length / PAGE_SIZE));
   const currentPage = Math.min(page, totalPages);
   const pageSlice = useMemo(() => {
     const start = (currentPage - 1) * PAGE_SIZE;
-    return filteredEvents.slice(start, start + PAGE_SIZE);
-  }, [filteredEvents, currentPage]);
+    return events.slice(start, start + PAGE_SIZE);
+  }, [events, currentPage]);
 
   function updateFilter<K extends keyof Filters>(key: K, value: Filters[K]) {
     setPage(1);
     setFilters((prev) => ({ ...prev, [key]: value }));
+    const newParams = new URLSearchParams(searchParams);
+
+    // Gestion des différents types de filtres
+    if (key === "date") {
+      if (value) {
+        newParams.set("date", value as string);
+      } else {
+        newParams.delete("date");
+      }
+    } else if (key === "month") {
+      if (value !== null) {
+        newParams.set("month", months[value as number]); // Index → "Janvier"
+      } else {
+        newParams.delete("month");
+      }
+    } else if (key === "paletType") {
+      if (Array.isArray(value) && value.length > 0) {
+        newParams.set("category", value[0]);
+      } else {
+        newParams.delete("category");
+      }
+    } else if (key === "department") {
+      if (Array.isArray(value) && value.length > 0) {
+        newParams.set("department", value.join(","));
+      } else {
+        newParams.delete("department");
+      }
+    } else if (key === "teamType") {
+      if (Array.isArray(value) && value.length > 0) {
+        newParams.set("teamType", value.join(","));
+      } else {
+        newParams.delete("teamType");
+      }
+    } else if (key === "organizerType") {
+      if (Array.isArray(value) && value.length > 0) {
+        newParams.set("organizerType", value.join(","));
+      } else {
+        newParams.delete("organizerType");
+      }
+    }
+
+    setSearchParams(newParams);
   }
 
   function updateMultiFilter(
     key: "department" | "paletType" | "teamType" | "organizerType",
     values: string[]
   ) {
-    setPage(1);
-    setFilters((prev) => ({ ...prev, [key]: values }));
+    updateFilter(key, values);
   }
 
   function clearFilters() {
@@ -200,6 +177,8 @@ export default function AllEvents() {
       organizerType: [],
     });
     setPage(1);
+    // Réinitialiser l'URL vers /concours sans paramètres
+    setSearchParams(new URLSearchParams());
   }
 
   function prevMonth() {
@@ -594,7 +573,7 @@ export default function AllEvents() {
               Réinitialiser
             </button>
             <div className="ml-auto text-sm text-slate-600 dark:text-slate-300 self-center">
-              {filteredEvents.length} résultat(s)
+              {events.length} résultat(s)
             </div>
           </div>
         </div>

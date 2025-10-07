@@ -11,8 +11,13 @@ const apiBaseUrl = import.meta.env.VITE_API_URL;
  * @throws Throws an error if the request fails or if there is an issue with the network.
  */
 
-export async function getAllEvents(): Promise<IEvents> {
-  const response = await fetch(`${apiBaseUrl}/events`);
+export async function getAllEvents(params?: URLSearchParams): Promise<IEvents> {
+  const queryString = params ? `?${params.toString()}` : "";
+  const response = await fetch(`${apiBaseUrl}/events${queryString}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!response.ok) {
     throw new Error(
       `Erreur lors de la récupération des concours: ${response.statusText}`
