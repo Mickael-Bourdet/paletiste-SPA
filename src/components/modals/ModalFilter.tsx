@@ -1,17 +1,22 @@
 interface IFilterProps {
+  modalWidth: number;
   options: string[];
   selected: string[];
   onChange: (next: string[]) => void;
 }
 
 export default function DepartmentFilter({
+  modalWidth,
   options,
   selected,
   onChange,
 }: IFilterProps) {
   return (
-    <div className="absolute left-0 mt-2 z-50 w-[180px] p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20">
-      <div className="grid grid-cols-3 gap-1 text-center">
+    <div
+      style={{ width: `${modalWidth}px` }}
+      className={`absolute left-0 mt-2 z-50 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20`}
+    >
+      <div className="grid grid-cols-3 gap-y-2 gap-x-6 text-center">
         {options.map((d) => {
           const id = `department-${d}`;
           const checked = selected.includes(d);

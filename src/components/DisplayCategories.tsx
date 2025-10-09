@@ -50,10 +50,7 @@ export default function DisplayCategories() {
               key={category.slug}
               className="basis-[90%] md:basis-[48%] lg:basis-[31%]  xl:[flex-basis:18%]"
             >
-              <Link
-                to={`/concours?category=${category.name}`}
-                className={cardClassName}
-              >
+              <Link to={`/concours`} className={cardClassName}>
                 <img
                   src={category.image}
                   alt=""

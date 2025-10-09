@@ -27,7 +27,7 @@ export default function DisplayCalendar() {
           <div className="bodyWrapper grid grid-cols-1 xxs:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
             {months.map((month) => (
               <Link
-                to={`/concours?month=${month.name}`}
+                to={`/concours`}
                 key={month.name}
                 className="border-2 border-slate-300/40 dark:border-slate-600/40 
            bg-body-second/80 dark:bg-sideMenu/10 

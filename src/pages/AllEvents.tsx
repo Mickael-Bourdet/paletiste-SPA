@@ -3,7 +3,7 @@ import type { IEvent } from "../@types/event";
 import { getAllEvents } from "../api/eventAPI";
 import EventCard from "../components/EventCard";
 import { useErrorHandler } from "../utils/useErrorHandler";
-import DepartmentFilter from "../components/modals/DepartmentFilter";
+import DepartmentFilter from "../components/modals/ModalFilter";
 
 const PAGE_SIZE = 20;
 
@@ -363,6 +363,7 @@ export default function AllEvents() {
 
               {open === "department" && (
                 <DepartmentFilter
+                  modalWidth={180}
                   options={departmentOptions}
                   selected={filters.department}
                   onChange={(next) =>
@@ -377,8 +378,28 @@ export default function AllEvents() {
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Type de palet
             </label>
-            <div className="grid grid-cols-2 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30">
-              {paletOptions.map((c) => {
+            <div className="relative inline-block">
+              <button
+                type="button"
+                onClick={() =>
+                  setOpen(open === "paletType" ? null : "paletType")
+                }
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+              >
+                Le type de palet
+              </button>
+
+              {open === "paletType" && (
+                <DepartmentFilter
+                  modalWidth={240}
+                  options={paletOptions}
+                  selected={filters.paletType}
+                  onChange={(next) =>
+                    setFilters({ ...filters, paletType: next })
+                  }
+                />
+              )}
+              {/* {paletOptions.map((c) => {
                 const id = `palet-${c}`;
                 const checked = filters.paletType.includes(c);
                 return (
@@ -402,7 +423,7 @@ export default function AllEvents() {
                     <span>{c}</span>
                   </label>
                 );
-              })}
+              })} */}
             </div>
           </div>
 
