@@ -1,5 +1,6 @@
 interface IFilterProps {
   modalWidth: number;
+  gridCols: number;
   options: string[];
   selected: string[];
   onChange: (next: string[]) => void;
@@ -7,6 +8,7 @@ interface IFilterProps {
 
 export default function DepartmentFilter({
   modalWidth,
+  gridCols,
   options,
   selected,
   onChange,
@@ -16,7 +18,10 @@ export default function DepartmentFilter({
       style={{ width: `${modalWidth}px` }}
       className={`absolute left-0 mt-2 z-50 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20`}
     >
-      <div className="grid grid-cols-3 gap-y-2 gap-x-6 text-center">
+      <div
+        className="grid gap-y-2 gap-x-6 text-center"
+        style={{ gridTemplateColumns: `repeat(${gridCols},minmax(0,1fr))` }}
+      >
         {options.map((d) => {
           const id = `department-${d}`;
           const checked = selected.includes(d);
@@ -24,7 +29,7 @@ export default function DepartmentFilter({
             <label
               key={d}
               htmlFor={id}
-              className="flex items-center gap-1 px-3 py-2 justify-center"
+              className="flex items-center gap-2 py-2 justify-start w-full cursor-pointer"
             >
               <input
                 type="checkbox"
@@ -35,13 +40,15 @@ export default function DepartmentFilter({
                     : [...selected, d];
                   onChange(next);
                 }}
-                className="h-5 w-5 accent-royal"
+                className="h-5 w-5 accent-royal "
                 style={{
-                  minWidth: "1rem",
-                  minHeight: "1rem",
+                  width: "16px",
+                  height: "16px",
+                  minWidth: "16px",
+                  minHeight: "16px",
                 }}
               />
-              <span>{d}</span>
+              <span className="whitespace-nowrap">{d}</span>
             </label>
           );
         })}

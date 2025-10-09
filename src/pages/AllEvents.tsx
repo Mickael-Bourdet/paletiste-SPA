@@ -3,7 +3,7 @@ import type { IEvent } from "../@types/event";
 import { getAllEvents } from "../api/eventAPI";
 import EventCard from "../components/EventCard";
 import { useErrorHandler } from "../utils/useErrorHandler";
-import DepartmentFilter from "../components/modals/ModalFilter";
+import DepartmentFilter from "../components/modals/BaseFilterModal";
 
 const PAGE_SIZE = 20;
 
@@ -363,7 +363,8 @@ export default function AllEvents() {
 
               {open === "department" && (
                 <DepartmentFilter
-                  modalWidth={180}
+                  modalWidth={200}
+                  gridCols={3}
                   options={departmentOptions}
                   selected={filters.department}
                   onChange={(next) =>
@@ -386,12 +387,13 @@ export default function AllEvents() {
                 }
                 className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
               >
-                Le type de palet
+                Type de palet
               </button>
 
               {open === "paletType" && (
                 <DepartmentFilter
-                  modalWidth={240}
+                  modalWidth={260}
+                  gridCols={3}
                   options={paletOptions}
                   selected={filters.paletType}
                   onChange={(next) =>
@@ -399,31 +401,6 @@ export default function AllEvents() {
                   }
                 />
               )}
-              {/* {paletOptions.map((c) => {
-                const id = `palet-${c}`;
-                const checked = filters.paletType.includes(c);
-                return (
-                  <label
-                    key={c}
-                    htmlFor={id}
-                    className="inline-flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      id={id}
-                      type="checkbox"
-                      checked={checked}
-                      onChange={(e) => {
-                        const next = e.target.checked
-                          ? [...filters.paletType, c]
-                          : filters.paletType.filter((x) => x !== c);
-                        updateMultiFilter("paletType", next);
-                      }}
-                      className="h-4 w-4 accent-royal"
-                    />
-                    <span>{c}</span>
-                  </label>
-                );
-              })} */}
             </div>
           </div>
 
@@ -431,32 +408,26 @@ export default function AllEvents() {
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Type d'équipe
             </label>
-            <div className="grid grid-cols-2 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30">
-              {teamTypeOptions.map((t) => {
-                const id = `team-${t}`;
-                const checked = filters.teamType.includes(t);
-                return (
-                  <label
-                    key={t}
-                    htmlFor={id}
-                    className="inline-flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      id={id}
-                      type="checkbox"
-                      checked={checked}
-                      onChange={(e) => {
-                        const next = e.target.checked
-                          ? [...filters.teamType, t]
-                          : filters.teamType.filter((x) => x !== t);
-                        updateMultiFilter("teamType", next);
-                      }}
-                      className="h-4 w-4 accent-royal"
-                    />
-                    <span>{t}</span>
-                  </label>
-                );
-              })}
+            <div className="relative inline-block">
+              <button
+                type="button"
+                onClick={() => setOpen(open === "teamType" ? null : "teamType")}
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+              >
+                Type d'équipe
+              </button>
+
+              {open === "teamType" && (
+                <DepartmentFilter
+                  modalWidth={150}
+                  gridCols={1}
+                  options={teamTypeOptions}
+                  selected={filters.teamType}
+                  onChange={(next) =>
+                    setFilters({ ...filters, teamType: next })
+                  }
+                />
+              )}
             </div>
           </div>
           <div className="flex flex-col gap-1">
