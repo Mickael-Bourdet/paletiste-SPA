@@ -6,7 +6,7 @@ interface IFilterProps {
   onChange: (next: string[]) => void;
 }
 
-export default function DepartmentFilter({
+export default function BaseFilterModal({
   modalWidth,
   gridCols,
   options,

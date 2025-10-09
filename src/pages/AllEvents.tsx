@@ -3,7 +3,7 @@ import type { IEvent } from "../@types/event";
 import { getAllEvents } from "../api/eventAPI";
 import EventCard from "../components/EventCard";
 import { useErrorHandler } from "../utils/useErrorHandler";
-import DepartmentFilter from "../components/modals/BaseFilterModal";
+import BaseFilterModal from "../components/modals/BaseFilterModal";
 
 const PAGE_SIZE = 20;
 
@@ -173,13 +173,13 @@ export default function AllEvents() {
     setFilters((prev) => ({ ...prev, [key]: value }));
   }
 
-  function updateMultiFilter(
+  /* function updateMultiFilter(
     key: "department" | "paletType" | "teamType" | "organizerType",
     values: string[]
   ) {
     setPage(1);
     setFilters((prev) => ({ ...prev, [key]: values }));
-  }
+  } */
 
   function clearFilters() {
     setFilters({
@@ -362,7 +362,7 @@ export default function AllEvents() {
               </button>
 
               {open === "department" && (
-                <DepartmentFilter
+                <BaseFilterModal
                   modalWidth={200}
                   gridCols={3}
                   options={departmentOptions}
@@ -391,7 +391,7 @@ export default function AllEvents() {
               </button>
 
               {open === "paletType" && (
-                <DepartmentFilter
+                <BaseFilterModal
                   modalWidth={260}
                   gridCols={3}
                   options={paletOptions}
@@ -418,7 +418,7 @@ export default function AllEvents() {
               </button>
 
               {open === "teamType" && (
-                <DepartmentFilter
+                <BaseFilterModal
                   modalWidth={150}
                   gridCols={1}
                   options={teamTypeOptions}
@@ -434,32 +434,28 @@ export default function AllEvents() {
             <label className="text-sm text-slate-600 dark:text-slate-300">
               Organisateur
             </label>
-            <div className="grid grid-cols-2 gap-2 rounded-xl border border-slate-300 dark:border-white/10 p-3 bg-white/70 dark:bg-slate-900/30">
-              {organizerTypeOptions.map((o) => {
-                const id = `org-${o}`;
-                const checked = filters.organizerType.includes(o);
-                return (
-                  <label
-                    key={o}
-                    htmlFor={id}
-                    className="inline-flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      id={id}
-                      type="checkbox"
-                      checked={checked}
-                      onChange={(e) => {
-                        const next = e.target.checked
-                          ? [...filters.organizerType, o]
-                          : filters.organizerType.filter((x) => x !== o);
-                        updateMultiFilter("organizerType", next);
-                      }}
-                      className="h-4 w-4 accent-royal"
-                    />
-                    <span>{o}</span>
-                  </label>
-                );
-              })}
+            <div className="relative inline-block">
+              <button
+                type="button"
+                onClick={() =>
+                  setOpen(open === "organizerType" ? null : "organizerType")
+                }
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+              >
+                Organiser par
+              </button>
+
+              {open === "organizerType" && (
+                <BaseFilterModal
+                  modalWidth={260}
+                  gridCols={2}
+                  options={organizerTypeOptions}
+                  selected={filters.organizerType}
+                  onChange={(next) =>
+                    setFilters({ ...filters, organizerType: next })
+                  }
+                />
+              )}
             </div>
           </div>
           <div className="sm:col-span-2 mdl:col-span-3 xlg:col-span-5">
