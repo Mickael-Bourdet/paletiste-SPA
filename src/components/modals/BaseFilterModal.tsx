@@ -16,7 +16,7 @@ export default function BaseFilterModal({
   return (
     <div
       style={{ width: `${modalWidth}px` }}
-      className={`absolute left-0 mt-2 z-50 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20`}
+      className={`absolute left-0 mt-2 z-60 p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20`}
     >
       <div
         className="grid gap-y-2 gap-x-6 text-center"

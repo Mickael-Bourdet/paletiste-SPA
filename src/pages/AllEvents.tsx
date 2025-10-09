@@ -246,7 +246,7 @@ export default function AllEvents() {
 
               {/* Date Modal */}
               {open === "date" && (
-                <div className="absolute left-0 mt-2 z-50 w-[320px] p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20">
+                <div className="absolute left-0 mt-2 z-60 w-[320px] p-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-white/20">
                   {/* Navigation mois */}
                   <div className="flex items-center justify-between mb-3">
                     <button
