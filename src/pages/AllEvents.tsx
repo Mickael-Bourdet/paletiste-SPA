@@ -239,7 +239,7 @@ export default function AllEvents() {
               <button
                 type="button"
                 onClick={() => setOpen(open === "date" ? null : "date")}
-                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 dark:hover:bg-white/10 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
               >
                 Sélectionner une date
               </button>
@@ -356,7 +356,7 @@ export default function AllEvents() {
                 onClick={() =>
                   setOpen(open === "department" ? null : "department")
                 }
-                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10 dark:hover:bg-white/10 "
               >
                 Choisir un département
               </button>
@@ -385,7 +385,7 @@ export default function AllEvents() {
                 onClick={() =>
                   setOpen(open === "paletType" ? null : "paletType")
                 }
-                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10 dark:hover:bg-white/10"
               >
                 Type de palet
               </button>
@@ -412,7 +412,7 @@ export default function AllEvents() {
               <button
                 type="button"
                 onClick={() => setOpen(open === "teamType" ? null : "teamType")}
-                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10 dark:hover:bg-white/10"
               >
                 Type d'équipe
               </button>
@@ -440,7 +440,7 @@ export default function AllEvents() {
                 onClick={() =>
                   setOpen(open === "organizerType" ? null : "organizerType")
                 }
-                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10"
+                className="relative z-50 px-3 py-2 rounded-xl border bg-white/70 hover:bg-slate-200 dark:bg-slate-900/30 border-slate-300 dark:border-white/10 dark:hover:bg-white/10"
               >
                 Organiser par
               </button>

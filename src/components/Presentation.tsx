@@ -41,7 +41,7 @@ export default function Presentation() {
               className="pointer-events-none absolute inset-0 rounded-2xl [mask-image:radial-gradient(80%_60%_at_50%_0%,black,transparent)]"
               style={{
                 background:
-                  "linear-gradient(120deg, rgba(58,95,205,0.35), rgba(74,108,247,0.15), rgba(191,91,4,0.2))",
+                  "linear-gradient(120deg, rgba(58, 176, 205, 0.35), rgba(74,108,247,0.15), rgba(191,91,4,0.2))",
               }}
             />
             <div className="relative flex items-center gap-3 px-5 md:px-6 py-4 md:py-5">

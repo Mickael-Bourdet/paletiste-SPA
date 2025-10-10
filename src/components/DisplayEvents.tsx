@@ -55,7 +55,7 @@ export default function DisplayEvents({
               300: { slidesPerView: 1 },
               768: { slidesPerView: 2 },
               1200: { slidesPerView: 3 },
-              1750: { slidesPerView: 4 },
+              1440: { slidesPerView: 4 },
             }}
             modules={[Pagination, Navigation, A11y]}
             className="mySwiper h-135 overflow-visible"

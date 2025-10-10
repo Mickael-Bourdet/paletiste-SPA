@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   const { theme, toggleTheme } = useThemeMode();
   return (
-    <header className="py-4 px-8 bg-body border-b border-gray-300 dark:border-gray-700  mdl:sticky mdl:top-0 mdl:z-20">
+    <header className="py-4 px-8 bg-body border-b border-gray-300 dark:border-gray-700  mdl:sticky mdl:top-0 mdl:z-90">
       <div className="wrapper mdl:flex items-center">
         <div className="flex justify-center items-center mdl:hidden">
           <img
